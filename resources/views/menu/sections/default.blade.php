@@ -1,9 +1,12 @@
-<?php
-$menu = Menu::example();
-if ($section->param('active')) {
-    $menu->setActive($section->param('active'));
-}
-?>
+@php
+    $menu = $section->param('menu');
+    $menu = \Ohio\Menu\Menu::$menu();
+    if ($section->param('active')) {
+        $menu->setActive($section->param('active'));
+    } else {
+        $menu->setActiveFromRequest();
+    }
+@endphp
 
 <div class="section section-block {{ $section->param('class') }}">
     @include('ohio-content::section.sections._header')
