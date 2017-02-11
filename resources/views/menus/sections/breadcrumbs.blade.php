@@ -11,6 +11,6 @@
 <div class="section section-block {{ $section->param('class') }}">
     @include('ohio-content::section.sections._header')
     @include('ohio-content::section.sections._body')
-    @include('ohio-menu::menu.web._breadcrumbs')
+    @include('ohio-menu::menus.web._breadcrumbs')
     @include('ohio-content::section.sections._footer')
 </div>
