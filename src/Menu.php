@@ -10,12 +10,19 @@ class Menu
 
     use Macroable;
 
+    public static $menus = [];
+
     public function get($key, $parameters = [])
     {
 
         $keys = explode('.', $key);
 
-        $menu = $this->__call($keys[0], $parameters);
+        if (isset(static::$menus[$keys[0]])) {
+            $menu = static::$menus[$keys[0]];
+        } else {
+            $menu = $this->__call($keys[0], $parameters);
+            static::$menus[$keys[0]] = $menu;
+        }
 
         if (count($keys) > 1) {
             $menu = $menu->submenu(implode('.', array_slice($keys, 1)));

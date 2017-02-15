@@ -7,22 +7,26 @@ use ArrayIterator;
 use RecursiveIteratorIterator;
 use Knp\Menu\Iterator\CurrentItemFilterIterator;
 use Knp\Menu\Iterator\RecursiveItemIterator;
-use Knp\Menu\MenuItem;
 use Knp\Menu\Matcher\Matcher;
 use Knp\Menu\Matcher\Voter\UriVoter;
-use Knp\Menu\Matcher\Voter\RegexVoter;
 use Knp\Menu\Renderer\ListRenderer;
 use Knp\Menu\Util\MenuManipulator;
+use Knp\Menu\ItemInterface;
 
 class MenuHelper
 {
 
     /**
-     * @var MenuItem
+     * @var ItemInterface
      */
     public $menu;
 
-    public function __construct(MenuItem $menu)
+    /**
+     * @var ItemInterface
+     */
+    public $active;
+
+    public function __construct($menu)
     {
         $this->menu = $menu;
     }
@@ -49,8 +53,26 @@ class MenuHelper
         return $this->menu->getChildren();
     }
 
-    public function current($uri)
+    public function add($uri, $label = null, $options = [])
     {
+
+        if ($uri instanceof \Closure) {
+            return call_user_func($uri, $this);
+        }
+
+        $options = array_merge($options, ['uri' => $uri, 'label' => $label]);
+
+        $name = array_get($options, 'name', str_slug($label));
+
+        $menuItem = $this->menu->addChild($name, $options);
+
+        return new MenuHelper($menuItem);
+    }
+
+    public function active($uri)
+    {
+        $this->active = null;
+
         $menu = clone $this->menu;
 
         $matcher = new Matcher();
@@ -64,36 +86,43 @@ class MenuHelper
         $iterator = new CurrentItemFilterIterator($treeIterator, $matcher);
 
         foreach ($iterator as $item) {
-            return $item;
+            $this->active = $item;
+            break;
         }
 
-        return null;
+        return $this->active;
     }
 
-    public function breadcrumbs($item)
+    public function breadcrumbs()
     {
         $menu = clone $this->menu;
 
-        $item = is_string($item) ? $this->current($item) : $item;
+        $results = (new MenuManipulator())->getBreadcrumbsArray($menu, $this->active);
 
-        $manipulator = new MenuManipulator();
-
-        $crumbs = $manipulator->getBreadcrumbsArray($menu, $item);
+        $crumbs = [];
+        foreach ($results as $result) {
+            if ($uri = array_get($result, 'uri')) {
+                $crumbs[] = (object) [
+                    'label' => array_get($result, 'label'),
+                    'uri' => $uri,
+                ];
+            }
+        }
 
         return $crumbs;
     }
 
-    public function render($options = [])
+    public function render()
     {
         $menu = clone $this->menu;
 
         $matcher = new Matcher();
 
-        if ($active = array_get($options, 'active')) {
-            $matcher->addVoter(new UriVoter($active));
+        if ($this->active) {
+            $matcher->addVoter(new UriVoter($this->active->getUri()));
         }
 
-        $result = (new ListRenderer($matcher))->render($menu);
+        $result = (new ListRenderer($matcher, ['currentClass' => 'active']))->render($menu);
 
         return $result;
     }
