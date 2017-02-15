@@ -51,9 +51,13 @@ class OhioMenuServiceProvider extends ServiceProvider
         // load other packages
         $this->app->register(Spatie\Menu\Laravel\MenuServiceProvider::class);
 
+        $this->app->bind('menu', function ($app) {
+            return new Ohio\Menu\Menu();
+        });
+
         // add other aliases
         $loader = AliasLoader::getInstance();
-        $loader->alias('Menu', Spatie\Menu\Laravel\MenuFacade::class);
+        $loader->alias('Menu', Ohio\Menu\Facades\MenuFacade::class);
 
         // load menus
         foreach (config('ohio.menu.menus', []) as $key => $config) {
