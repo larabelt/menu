@@ -1,13 +1,13 @@
 <?php
 
-namespace Ohio\Menu\Facades;
+namespace Belt\Menu\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class MenuFacade extends Facade
 {
     /**
-     * @see \Ohio\Menu\Menu
+     * @see \Belt\Menu\Menu
      */
     protected static function getFacadeAccessor(): string
     {

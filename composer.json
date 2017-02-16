@@ -1,6 +1,6 @@
 {
-  "name": "ohiocms/menu",
-  "description": "Menu package for OhioCMS.",
+  "name": "larabelt/menu",
+  "description": "Menu package for LaraBelt.",
   "authors": [
     {
       "name": "Matt Crowe",
@@ -13,13 +13,13 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "ohiocms/core": "dev-master",
+    "larabelt/core": "dev-master",
     "spatie/laravel-menu": "^2.1",
     "knplabs/knp-menu": "^2.2"
   },
   "autoload": {
     "psr-4": {
-      "Ohio\\Menu\\": "src/"
+      "Belt\\Menu\\": "src/"
     }
   }
 }

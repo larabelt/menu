@@ -1,6 +1,6 @@
 <?php
 
-namespace Ohio\Menu;
+namespace Belt\Menu;
 
 use Illuminate\Support\Traits\Macroable;
 use Knp\Menu\MenuFactory;

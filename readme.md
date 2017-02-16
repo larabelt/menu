@@ -2,7 +2,7 @@
 
 ```
 # install assets & migrate
-php artisan ohio-menu:publish
+php artisan belt-menu:publish
 composer dumpautoload
 
 # compile assets

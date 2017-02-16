@@ -1,6 +1,6 @@
 @php
     $menu = $section->param('menu');
-    $menu = \Ohio\Menu\Menu::$menu();
+    $menu = \Belt\Menu\Menu::$menu();
     if ($section->param('active')) {
         $menu->setActive($section->param('active'));
     } else {
@@ -9,8 +9,8 @@
 @endphp
 
 <div class="section section-block {{ $section->param('class') }}">
-    @include('ohio-content::section.sections._header')
-    @include('ohio-content::section.sections._body')
-    @include('ohio-menu::menu.web._show')
-    @include('ohio-content::section.sections._footer')
+    @include('belt-content::sections.sections._header')
+    @include('belt-content::sections.sections._body')
+    @include('belt-menu::menu.web._show')
+    @include('belt-content::sections.sections._footer')
 </div>

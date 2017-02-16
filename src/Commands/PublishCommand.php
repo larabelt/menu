@@ -1,8 +1,8 @@
 <?php
 
-namespace Ohio\Menu\Commands;
+namespace Belt\Menu\Commands;
 
-use Ohio\Core\Commands\PublishCommand as Command;
+use Belt\Core\Commands\PublishCommand as Command;
 
 class PublishCommand extends Command
 {
@@ -12,18 +12,18 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ohio-menu:publish {--force}';
+    protected $signature = 'belt-menu:publish {--force}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'publish assets for ohio menu';
+    protected $description = 'publish assets for belt menu';
 
     protected $dirs = [
-        'vendor/ohiocms/menu/config' => 'config/ohio',
-        'vendor/ohiocms/menu/resources' => 'resources/ohio/menu',
+        'vendor/larabelt/menu/config' => 'config/belt',
+        'vendor/larabelt/menu/resources' => 'resources/belt/menu',
     ];
 
 }
