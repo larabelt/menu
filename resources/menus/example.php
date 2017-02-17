@@ -1,7 +1,5 @@
 <?php
 
-use Belt\Menu\Menu;
-use Belt\Menu\Link;
 use Belt\Content\Page;
 
 Menu::macro('example', function () {

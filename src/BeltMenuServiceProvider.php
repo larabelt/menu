@@ -37,10 +37,10 @@ class BeltMenuServiceProvider extends ServiceProvider
     {
 
         // set view paths
-        $this->loadViewsFrom(resource_path('belt/menu/views'), 'belt-menu');
+        // $this->loadViewsFrom(resource_path('belt/menu/views'), 'belt-menu');
 
         // set backup view paths
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'belt-menu');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'belt-menu');
 
         // policies
         $this->registerPolicies($gate);

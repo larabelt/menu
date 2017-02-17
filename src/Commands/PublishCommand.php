@@ -23,7 +23,7 @@ class PublishCommand extends Command
 
     protected $dirs = [
         'vendor/larabelt/menu/config' => 'config/belt',
-        'vendor/larabelt/menu/resources' => 'resources/belt/menu',
+        //'vendor/larabelt/menu/resources' => 'resources/belt/menu',
     ];
 
 }
