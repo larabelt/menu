@@ -4,6 +4,10 @@ namespace Belt\Menu\Commands;
 
 use Belt\Core\Commands\PublishCommand as Command;
 
+/**
+ * Class PublishCommand
+ * @package Belt\Menu\Commands
+ */
 class PublishCommand extends Command
 {
 
@@ -21,6 +25,9 @@ class PublishCommand extends Command
      */
     protected $description = 'publish assets for belt menu';
 
+    /**
+     * @var array
+     */
     protected $dirs = [
         'vendor/larabelt/menu/config' => 'config/belt',
         'vendor/larabelt/menu/resources/js' => 'resources/belt/menu/js',

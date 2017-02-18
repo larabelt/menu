@@ -8,6 +8,10 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class BeltMenuServiceProvider
+ * @package Belt\Menu
+ */
 class BeltMenuServiceProvider extends ServiceProvider
 {
 

@@ -13,6 +13,10 @@ use Knp\Menu\Renderer\ListRenderer;
 use Knp\Menu\Util\MenuManipulator;
 use Knp\Menu\ItemInterface;
 
+/**
+ * Class MenuHelper
+ * @package Belt\Menu
+ */
 class MenuHelper
 {
 
@@ -26,21 +30,35 @@ class MenuHelper
      */
     public $active;
 
+    /**
+     * MenuHelper constructor.
+     * @param $menu
+     */
     public function __construct($menu)
     {
         $this->menu = $menu;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return ItemInterface
+     */
     public function menu()
     {
         return $this->menu;
     }
 
+    /**
+     * @param $key
+     * @return MenuHelper
+     */
     public function submenu($key)
     {
         $menu = array_get($this->menu, $key, $this->menu);
@@ -48,11 +66,20 @@ class MenuHelper
         return new MenuHelper($menu);
     }
 
+    /**
+     * @return ItemInterface[]
+     */
     public function items()
     {
         return $this->menu->getChildren();
     }
 
+    /**
+     * @param $uri
+     * @param null $label
+     * @param array $options
+     * @return MenuHelper|mixed
+     */
     public function add($uri, $label = null, $options = [])
     {
 
@@ -69,6 +96,10 @@ class MenuHelper
         return new MenuHelper($menuItem);
     }
 
+    /**
+     * @param $uri
+     * @return ItemInterface|mixed|null
+     */
     public function active($uri)
     {
         $this->active = null;
@@ -93,6 +124,9 @@ class MenuHelper
         return $this->active;
     }
 
+    /**
+     * @return array
+     */
     public function breadcrumbs()
     {
         $menu = clone $this->menu;
@@ -112,6 +146,9 @@ class MenuHelper
         return $crumbs;
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $menu = clone $this->menu;
