@@ -1,11 +1,5 @@
 <?php
 
-// abstract into new package...
-// extend spatie?
-// partial
-// breadcrumbs
-// bootstrap
-
 return [
     'menus' => [
         'example' => [
