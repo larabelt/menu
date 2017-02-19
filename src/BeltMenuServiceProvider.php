@@ -70,6 +70,9 @@ class BeltMenuServiceProvider extends ServiceProvider
                 include $path;
             }
         }
+
+        # beltable values for global belt command
+        $this->app['belt']->publish('belt-menu:publish');
     }
 
     /**
