@@ -52,9 +52,6 @@ class BeltMenuServiceProvider extends ServiceProvider
         // commands
         $this->commands(Belt\Menu\Commands\PublishCommand::class);
 
-        // load other packages
-        $this->app->register(Spatie\Menu\Laravel\MenuServiceProvider::class);
-
         $this->app->bind('menu', function ($app) {
             return new Belt\Menu\Menu();
         });
