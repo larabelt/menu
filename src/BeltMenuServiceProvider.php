@@ -2,8 +2,9 @@
 
 namespace Belt\Menu;
 
-use Belt, Spatie;
+use Belt;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
@@ -48,6 +49,11 @@ class BeltMenuServiceProvider extends ServiceProvider
 
         // policies
         $this->registerPolicies($gate);
+
+        // morphMap
+        Relation::morphMap([
+            'menus' => Belt\Content\Section::class,
+        ]);
 
         // commands
         $this->commands(Belt\Menu\Commands\PublishCommand::class);
