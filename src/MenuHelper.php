@@ -87,6 +87,13 @@ class MenuHelper
             return call_user_func($uri, $this);
         }
 
+        $prefix = $this->menu->getUri() ?: '';
+
+        // apply prefix if uri is relative
+        if ($prefix && substr($uri, 0, 1) != '/' && substr($uri, 0, 4) != 'http') {
+            $uri = $prefix ? "$prefix/$uri" : $uri;
+        }
+
         $options = array_merge($options, ['uri' => $uri, 'label' => $label]);
 
         $name = array_get($options, 'name', str_slug($label));
@@ -118,11 +125,22 @@ class MenuHelper
 
         foreach ($iterator as $item) {
             $this->active = $item;
-            $item->setCurrent(true);
+            $this->setActive($item);
             break;
         }
 
         return $this->active;
+    }
+
+    /**
+     * @param $item
+     */
+    public function setActive($item)
+    {
+        $item->setCurrent(true);
+        if ($parent = $item->getParent()) {
+            $this->setActive($parent);
+        }
     }
 
     /**
