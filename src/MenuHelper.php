@@ -118,6 +118,7 @@ class MenuHelper
 
         foreach ($iterator as $item) {
             $this->active = $item;
+            $item->setCurrent(true);
             break;
         }
 
