@@ -15,4 +15,6 @@
         @include('belt-menu::menus.web.default')
         @include('belt-content::sections.sections._after')
     </div>
+@else
+    <p>section with empty menu</p>
 @endif
