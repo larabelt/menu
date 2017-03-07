@@ -2,9 +2,9 @@
 
 namespace Belt\Menu;
 
-use Knp;
-use ArrayIterator;
-use RecursiveIteratorIterator;
+use ArrayIterator, Cache, Knp, RecursiveIteratorIterator;
+use Belt\Content\Behaviors\HandleableInterface;
+use Illuminate\Http\Request;
 use Knp\Menu\Iterator\CurrentItemFilterIterator;
 use Knp\Menu\Iterator\RecursiveItemIterator;
 use Knp\Menu\Matcher\Matcher;
@@ -130,6 +130,24 @@ class MenuHelper
         }
 
         return $this->active;
+    }
+
+    public function guessActive($section = null)
+    {
+        $active = null;
+
+        if ($section && $owner = $section->owner) {
+            if ($owner instanceof HandleableInterface && $handle = $owner->handle) {
+                $active = $this->active("/" . $handle->url);
+            }
+        }
+
+        if (!$active) {
+            $request = Request::capture();
+            $path = $request->path();
+            $this->active("/$path");
+        }
+
     }
 
     /**
