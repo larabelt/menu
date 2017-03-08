@@ -15,6 +15,8 @@ class MenuHelperTest extends BeltTestCase
      * @covers \Belt\Menu\MenuHelper::items
      * @covers \Belt\Menu\MenuHelper::add
      * @covers \Belt\Menu\MenuHelper::active
+     * @covers \Belt\Menu\MenuHelper::setActive
+     * @covers \Belt\Menu\MenuHelper::guessActive
      * @covers \Belt\Menu\MenuHelper::breadcrumbs
      * @covers \Belt\Menu\MenuHelper::render
      */
@@ -30,9 +32,9 @@ class MenuHelperTest extends BeltTestCase
             # products submenu
             $submenu = $menu->add('/products', 'Products');
             $submenu->add(function ($menu) {
-                $menu->add('/products/widgets', 'Widgets');
-                $menu->add('/products/widgets/large', 'Large Widgets');
-                $menu->add('/products/widgets/small', 'Small Widgets');
+                $menu->add('/products/widgets', 'Widgets'); // relative with leading slash, should ignore prefix
+                $menu->add('widgets/large', 'Large Widgets'); // relative without leading slash, should get prefix
+                $menu->add('widgets/small', 'Small Widgets'); // relative without leading slash, should get prefix
             });
 
             return $menu;
@@ -62,6 +64,19 @@ class MenuHelperTest extends BeltTestCase
         # render
         # toString
         $this->assertTrue(str_contains($menuHelper->__toString(), '<ul'));
+
+        # guess active w/o section
+        $menuHelper = $beltMenu->get('MenuHelperTestMacro');
+        $menuHelper->guessActive();
+
+        # guess active w/section
+        $section = factory(\Belt\Content\Section::class)->make([
+            'owner' => factory(\Belt\Content\Page::class)->make([
+                'handle' => factory(\Belt\Content\Handle::class)->make()
+            ])
+        ]);
+        $menuHelper = $beltMenu->get('MenuHelperTestMacro');
+        $menuHelper->guessActive($section);
 
     }
 
