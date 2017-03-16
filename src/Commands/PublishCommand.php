@@ -16,7 +16,7 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'belt-menu:publish {--force} {--path=}';
+    protected $signature = 'belt-menu:publish {action=publish} {--force} {--path=}';
 
     /**
      * The console command description.
