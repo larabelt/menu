@@ -23,6 +23,8 @@ class MenuHelperTest extends BeltTestCase
     public function test()
     {
 
+        $this->refreshDB();
+
         MenuFacade::macro('MenuHelperTestMacro', function () {
 
             $menu = Menu::create('test');
@@ -70,11 +72,9 @@ class MenuHelperTest extends BeltTestCase
         $menuHelper->guessActive();
 
         # guess active w/section
-        $section = factory(\Belt\Content\Section::class)->make([
-            'owner' => factory(\Belt\Content\Page::class)->make([
-                'handle' => factory(\Belt\Content\Handle::class)->make()
-            ])
-        ]);
+        $section = factory(\Belt\Content\Section::class)->make();
+        $section->owner = factory(\Belt\Content\Page::class)->make();
+        $section->owner->handle = factory(\Belt\Content\Handle::class)->make();
         $menuHelper = $beltMenu->get('MenuHelperTestMacro');
         $menuHelper->guessActive($section);
 
