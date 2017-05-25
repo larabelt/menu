@@ -1,0 +1,62 @@
+<div>
+    <div class="clearfix">
+        <div class="btn-group">
+            <router-link :to="{ name: 'menuItems.create' }" :class="'btn btn-primary'">Add Menu Item</router-link>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div v-if="loading">
+            <i class="fa fa-spinner fa-spin fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <table v-if="table.items.length" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Label</th>
+                <th>Url</th>
+                <th class="text-right">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="menuItem in table.items">
+                <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.label }}</td>
+                <td>{{ menuItem.url }}</td>
+                <td class="text-right">
+                    <template v-if="isMoving">
+                        <template v-if="isMoving != menuItem.id">
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-xs" @click.prevent="move(menuItem.id, 'before')" title="move before this item">
+                                    <i class="fa fa-caret-up"></i>
+                                </button>
+                                <button class="btn btn-default btn-xs" @click.prevent="move(menuItem.id, 'after')" title="move after this item">
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <button class="btn btn-default btn-xs" @click.prevent="move(menuItem.id, 'in')" title="add as child to this item">
+                                    <i class="fa fa-caret-right"></i>
+                                </button>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <div class="btn-group">
+                                <button class="btn btn-info btn-xs" @click.prevent="cancelMove()">cancel</button>
+                            </div>
+                        </template>
+                    </template>
+
+                    <div v-if="!isMoving" class="btn-group">
+                        <button class="btn btn-default btn-xs" @click.prevent="setMoving(menuItem.id)"><i class="fa fa-arrows-alt"></i></button>
+                        <router-link :to="{ name: 'menuItems.edit', params: { menuItemId: menuItem.id } }" :class="'btn btn-xs btn-default'">
+                            <i class="fa fa-edit"></i>
+                        </router-link>
+                        <modal-delete :item-id="menuItem.id" :callingObject="table"></modal-delete>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+    <pagination></pagination>
+</div>

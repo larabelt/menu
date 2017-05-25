@@ -2,6 +2,7 @@
 
 namespace Belt\Menu;
 
+use Belt\Menu\Services\MenuService;
 use Illuminate\Support\Traits\Macroable;
 use Knp\Menu\MenuFactory;
 
@@ -32,7 +33,11 @@ class Menu
         if (isset(static::$menus[$keys[0]])) {
             $menu = static::$menus[$keys[0]];
         } else {
+
+            (new MenuService())->push($key);
+
             $menu = $this->__call($keys[0], $parameters);
+
             static::$menus[$keys[0]] = $menu;
         }
 
@@ -47,11 +52,28 @@ class Menu
      * @param $name
      * @return MenuHelper
      */
-    public function create($name)
+    public static function create($name)
     {
         $menu = (new MenuFactory())->createItem($name);
 
         return new MenuHelper($menu);
+    }
+
+    /**
+     * @param MenuHelper $menu
+     * @param MenuItem $parent
+     */
+    public static function submenu(MenuHelper $menu, MenuItem $parent)
+    {
+        if ($children = $parent->children) {
+            $menu->add(function ($menu) use ($children) {
+                foreach ($children as $child) {
+                    $submenu = $menu->add($child->url, $child->label);
+                    static::submenu($submenu, $child);
+                }
+            });
+        }
+
     }
 
 }

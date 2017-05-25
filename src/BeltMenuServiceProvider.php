@@ -3,6 +3,7 @@
 namespace Belt\Menu;
 
 use Belt;
+use Belt\Menu\Services\MenuService;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\AliasLoader;
@@ -30,7 +31,8 @@ class BeltMenuServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        include __DIR__ . '/../routes/admin.php';
+        include __DIR__ . '/../routes/api.php';
     }
 
     /**
@@ -52,21 +54,27 @@ class BeltMenuServiceProvider extends ServiceProvider
 
         // morphMap
         Relation::morphMap([
-            'menus' => Belt\Content\Section::class,
+            'menu-groups' => Belt\Menu\MenuGroup::class,
+            'menu-items' => Belt\Menu\MenuItem::class,
         ]);
 
         // commands
+        $this->commands(Belt\Menu\Commands\BuildCommand::class);
         $this->commands(Belt\Menu\Commands\PublishCommand::class);
 
         $this->app->bind('menu', function ($app) {
             return new Belt\Menu\Menu();
         });
 
+        // route model binding
+        $router->model('menu_group', Belt\Menu\MenuGroup::class);
+        $router->model('menu_item', Belt\Menu\MenuItem::class);
+
         // add other aliases
         $loader = AliasLoader::getInstance();
         $loader->alias('Menu', Belt\Menu\Facades\MenuFacade::class);
 
-        // load menus
+        // load menus from files
         foreach (config('belt.menu.menus', []) as $key => $config) {
             $path = array_get($config, 'path');
             if ($path && file_exists($path)) {
@@ -76,6 +84,7 @@ class BeltMenuServiceProvider extends ServiceProvider
 
         # beltable values for global belt command
         $this->app['belt']->publish('belt-menu:publish');
+        $this->app['belt']->seeders('BeltMenuSeeder');
     }
 
     /**
