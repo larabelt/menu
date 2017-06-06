@@ -78,9 +78,10 @@ class MenuHelper
      * @param $uri
      * @param null $label
      * @param array $options
+     * @param array $linkAttributes
      * @return MenuHelper|mixed
      */
-    public function add($uri, $label = null, $options = [])
+    public function add($uri, $label = null, $options = [], $linkAttributes = [])
     {
 
         if ($uri instanceof \Closure) {
@@ -99,6 +100,10 @@ class MenuHelper
         $name = array_get($options, 'name', str_slug($label));
 
         $menuItem = $this->menu->addChild($name, $options);
+
+        foreach ($linkAttributes as $key => $value) {
+            $menuItem->setLinkAttribute($key, $value);
+        }
 
         return new MenuHelper($menuItem);
     }
