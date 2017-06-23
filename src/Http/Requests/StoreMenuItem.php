@@ -17,7 +17,10 @@ class StoreMenuItem extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'label' => 'required',
+            'url' => 'required',
+        ];
     }
 
 }

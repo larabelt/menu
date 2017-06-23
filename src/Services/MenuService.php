@@ -2,7 +2,8 @@
 
 namespace Belt\Menu\Services;
 
-use Belt, Menu;
+use Belt;
+use Belt\Menu\Menu;
 use Belt\Menu\MenuGroup;
 use Belt\Menu\MenuItem;
 use Belt\Menu\MenuHelper;
@@ -14,42 +15,21 @@ use Knp\Menu\ItemInterface;
  */
 class MenuService
 {
+    /**
+     * @var MenuGroup
+     */
+    public $menuGroup;
 
     /**
-     * Add db-driven macro if applicable
-     *
-     * @param $key
-     * @return bool
+     * @var MenuItem
      */
-    public function push($key)
+    public $menuItem;
+
+    public function __construct()
     {
-        if (Menu::hasMacro($key)) {
-            return;
-        }
-
-        $menuGroup = MenuGroup::sluggish($key)->first();
-
-        if ($menuGroup) {
-            $this->load($menuGroup);
-        }
-    }
-
-    /**
-     * @param MenuGroup $menuGroup
-     */
-    public function load(MenuGroup $menuGroup)
-    {
-        Menu::macro($menuGroup->slug, function () use ($menuGroup) {
-
-            $menu = Menu::create($menuGroup->slug);
-
-            foreach ($menuGroup->menuItems as $menuItem) {
-                $submenu = $menu->add($menuItem->url, $menuItem->label);
-                Menu::submenu($submenu, $menuItem);
-            }
-
-            return $menu;
-        });
+        $this->menu = new Menu();
+        $this->menuGroup = new MenuGroup();
+        $this->menuItem = new MenuItem();
     }
 
     /**
@@ -59,15 +39,17 @@ class MenuService
      */
     public function build($name)
     {
-        if (MenuGroup::sluggish($name)->first()) {
+        # skip if it already exists in db
+        if ($this->menuGroup->sluggish($name)->first()) {
             return;
         }
 
         /**
          * @var $menu MenuHelper
          */
-        $menu = Menu::get($name);
+        $menu = $this->menu->get($name);
 
+        # skip if isn't loaded as a macro via hard-coding
         if (!$menu) {
             return;
         }
@@ -75,7 +57,7 @@ class MenuService
         MenuGroup::unguard();
         MenuItem::unguard();
 
-        $menuGroup = MenuGroup::create([
+        $menuGroup = $this->menuGroup->create([
             'name' => $name,
             'slug' => $name,
         ]);
@@ -95,7 +77,7 @@ class MenuService
      */
     public function __build(MenuGroup $menuGroup, ItemInterface $item, MenuItem $parent = null)
     {
-        $menuItem = MenuItem::create([
+        $menuItem = $this->menuItem->create([
             'parent_id' => $parent ? $parent->id : null,
             'menu_group_id' => $menuGroup->id,
             'label' => $item->getLabel(),

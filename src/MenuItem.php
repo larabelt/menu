@@ -42,17 +42,16 @@ class MenuItem extends Model implements
         $this->attributes['url'] = StrHelper::normalizeUrl($value);
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $data = parent::toArray();
-        //$data['children'] = $this->children()->orderBy('_lft')->get()->toArray();
-        $data['ancestors'] = $this->getAncestors()->pluck('label')->all();
-
-        return $data;
-    }
+//    /**
+//     * @return array
+//     */
+//    public function toArray()
+//    {
+//        $data = parent::toArray();
+//        $data['ancestors'] = $this->getAncestors()->pluck('label')->all();
+//
+//        return $data;
+//    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

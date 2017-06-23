@@ -22,54 +22,16 @@ class MenuItemsController extends ApiController
      */
     public $morphHelper;
 
-    /**
-     * @var CompileService
-     */
-    public $service;
-
     public function __construct(MenuItem $menuItem, MorphHelper $morphHelper)
     {
         $this->menuItems = $menuItem;
         $this->morphHelper = $morphHelper;
     }
 
-    public function section($id, $owner = null)
-    {
-        $qb = $this->sections->query();
-
-        if ($owner) {
-            $qb->owned($owner->getMorphClass(), $owner->id);
-        }
-
-        $section = $qb->where('sections.id', $id)->first();
-
-        return $section ?: $this->abort(404);
-    }
-
     public function contains(MenuGroup $menuGroup, MenuItem $menuItem)
     {
         if ($menuItem->menu_group_id != $menuGroup->id) {
             $this->abort(404);
-        }
-    }
-
-    /**
-     * @return CompileService
-     */
-    public function service()
-    {
-        return $this->service = $this->service ?: new CompileService();
-    }
-
-    /**
-     * Cache sections
-     *
-     * @param $owner
-     */
-    public function cache($owner)
-    {
-        if ($owner instanceof HasSectionsInterface) {
-            $this->service()->cache($owner, true);
         }
     }
 
@@ -112,21 +74,19 @@ class MenuItemsController extends ApiController
 
         $menuItem = $this->menuItems->create([
             'menu_group_id' => $menuGroup->id,
+            'label' => $input['label'],
+            'url' => $input['url'],
         ]);
 
         $this->set($menuItem, $input, [
             'parent_id',
             'menuable_id',
             'menuable_type',
-            'label',
-            'url',
             'target',
             'slug',
         ]);
 
         $menuItem->save();
-
-        //$this->cache($owner);
 
         return response()->json($menuItem, 201);
     }
@@ -178,8 +138,6 @@ class MenuItemsController extends ApiController
 
         $menuItem->save();
 
-        //$this->cache($owner);
-
         return response()->json($menuItem);
     }
 
@@ -198,8 +156,6 @@ class MenuItemsController extends ApiController
         $this->authorize('update', $menuGroup);
 
         $menuItem->delete();
-
-        //$this->cache($owner);
 
         return response()->json(null, 204);
     }

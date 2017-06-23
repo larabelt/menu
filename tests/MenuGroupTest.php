@@ -2,22 +2,18 @@
 
 use Belt\Core\Testing\BeltTestCase;
 use Belt\Menu\MenuGroup;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MenuGroupTest extends BeltTestCase
 {
     /**
-     * @covers \Belt\Content\MenuGroup::__toString
-     * @covers \Belt\Content\MenuGroup::setTemplateAttribute
-     * @covers \Belt\Content\MenuGroup::setBodyAttribute
+     * @covers \Belt\Menu\MenuGroup::menuItems
      */
     public function test()
     {
         $menuGroup = factory(MenuGroup::class)->make();
-        $menuGroup->name = ' Test ';
-        $menuGroup->body = ' Test ';
 
-        $this->assertEquals($menuGroup->name, $menuGroup->__toString());
-        $this->assertEquals('Test', $menuGroup->body);
+        $this->assertInstanceOf(HasMany::class, $menuGroup->menuItems());
     }
 
 }

@@ -23,8 +23,6 @@ class PaginateMenuItems extends PaginateRequest
 
     public function modifyQuery(Builder $query)
     {
-        //$query->whereNull('parent_id');
-
         if ($menuGroupId = $this->get('menu_group_id')) {
             $query->where('menu_group_id', $menuGroupId);
         }

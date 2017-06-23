@@ -16,8 +16,8 @@ class UpdateMenuItem extends FormRequest
     public function rules()
     {
         return [
-            //'name' => 'sometimes|required',
-            //'body' => 'sometimes|required',
+            'label' => 'sometimes|required',
+            'url' => 'sometimes|required',
         ];
     }
 

@@ -21,38 +21,76 @@ class Menu
     public static $menus = [];
 
     /**
+     * @var MenuGroup
+     */
+    public $menuGroup;
+
+    public function __construct()
+    {
+        $this->menuGroup = new MenuGroup();
+    }
+
+    /**
      * @param $key
      * @param array $parameters
-     * @return mixed
+     * @return mixed|null
+     * @throws \Exception
      */
     public function get($key, $parameters = [])
     {
-
         $keys = explode('.', $key);
 
-        if (isset(static::$menus[$keys[0]])) {
-            $menu = static::$menus[$keys[0]];
-        } else {
+        $slug = $keys[0];
 
-            (new MenuService())->push($key);
+        $menu = static::$menus[$slug] ?? null;
 
-            $menu = $this->__call($keys[0], $parameters);
-
-            static::$menus[$keys[0]] = $menu;
+        # search hard-code macro
+        if (!$menu && $this->hasMacro($slug)) {
+            $menu = $this->__call($slug, $parameters);
         }
 
-        if (count($keys) > 1) {
-            $menu = $menu->submenu(implode('.', array_slice($keys, 1)));
+        # search db and create macro
+        if (!$menu && $menuGroup = $this->menuGroup->sluggish($slug)->first()) {
+            $this->load($menuGroup);
+            $menu = $this->__call($slug, $parameters);
         }
 
-        return $menu;
+        # statically save menu & return
+        if ($menu) {
+            static::$menus[$slug] = $menu;
+            # return submenu instead
+            if (count($keys) > 1) {
+                $menu = $menu->submenu(implode('.', array_slice($keys, 1)));
+            }
+            return $menu;
+        }
+
+        throw new \Exception("menu '$slug' not defined");
+    }
+
+    /**
+     * @param MenuGroup $menuGroup
+     */
+    public function load(MenuGroup $menuGroup)
+    {
+        $this->macro($menuGroup->slug, function () use ($menuGroup) {
+
+            $menu = $this->create($menuGroup->slug);
+
+            foreach ($menuGroup->menuItems as $menuItem) {
+                $submenu = $menu->add($menuItem->url, $menuItem->label);
+                $this->submenu($submenu, $menuItem);
+            }
+
+            return $menu;
+        });
     }
 
     /**
      * @param $name
      * @return MenuHelper
      */
-    public static function create($name)
+    public function create($name)
     {
         $menu = (new MenuFactory())->createItem($name);
 
@@ -63,17 +101,16 @@ class Menu
      * @param MenuHelper $menu
      * @param MenuItem $parent
      */
-    public static function submenu(MenuHelper $menu, MenuItem $parent)
+    public function submenu(MenuHelper $menu, MenuItem $parent)
     {
         if ($children = $parent->children) {
             $menu->add(function ($menu) use ($children) {
                 foreach ($children as $child) {
                     $submenu = $menu->add($child->url, $child->label);
-                    static::submenu($submenu, $child);
+                    $this->submenu($submenu, $child);
                 }
             });
         }
-
     }
 
 }

@@ -32,7 +32,7 @@ class MenuHelperTest extends BeltTestCase
             $menu->add('/about', 'About');
 
             # products submenu
-            $submenu = $menu->add('/products', 'Products');
+            $submenu = $menu->add('/products', 'Products', [], ['target' => '_blank']);
             $submenu->add(function ($menu) {
                 $menu->add('/products/widgets', 'Widgets'); // relative with leading slash, should ignore prefix
                 $menu->add('widgets/large', 'Large Widgets'); // relative without leading slash, should get prefix
