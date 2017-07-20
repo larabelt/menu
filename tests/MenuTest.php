@@ -19,8 +19,8 @@ class MenuTest extends BeltTestCase
      * @covers \Belt\Menu\Menu::__construct
      * @covers \Belt\Menu\Menu::get
      * @covers \Belt\Menu\Menu::create
-     * @covers \Belt\Menu\Menu::submenu
      * @covers \Belt\Menu\Menu::load
+     * @covers \Belt\Menu\Menu::add
      */
     public function test()
     {
@@ -91,7 +91,7 @@ class MenuTest extends BeltTestCase
         $beltMenu->menuGroup = $qb;
         $this->assertNotNull($beltMenu->get('db-menu'));
 
-        # submenu
+        # add
         $beltMenu = new BeltMenu();
         MenuItem::unguard();
         $parent = factory(MenuItem::class)->make(['url' => '/parent']);
@@ -100,7 +100,7 @@ class MenuTest extends BeltTestCase
         $this->child($parent);
         $this->child($parent);
         $menu = $beltMenu->create('test');
-        $beltMenu->submenu($menu, $parent);
+        $beltMenu->add($menu, $parent);
     }
 
     private function child($parent)

@@ -12,6 +12,7 @@ class MenuItemForm extends BaseForm {
         this.service = new BaseService({baseUrl: baseUrl});
         this.setData({
             id: '',
+            driver: '',
             parent_id: null,
             label: '',
             url: '',
@@ -31,12 +32,11 @@ class MenuItemForm extends BaseForm {
                         menuItemId: this.id,
                     }
                 })
-            })
+            });
     }
 
     fullName() {
         let names = this.ancestors.concat(this.label);
-
         return names.join(' > ');
     }
 

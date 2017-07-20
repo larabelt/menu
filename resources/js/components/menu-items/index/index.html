@@ -14,6 +14,7 @@
             <tr>
                 <th>Label</th>
                 <th>Url</th>
+                <th>Type</th>
                 <th class="text-right">Actions</th>
             </tr>
             </thead>
@@ -21,6 +22,8 @@
             <tr v-for="menuItem in table.items">
                 <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.label }}</td>
                 <td>{{ menuItem.url }}</td>
+                <td v-if="menuItem.menuable_type">{{ menuItem.menuable_type }}</td>
+                <td v-else>default</td>
                 <td class="text-right">
                     <template v-if="isMoving">
                         <template v-if="isMoving != menuItem.id">

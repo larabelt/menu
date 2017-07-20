@@ -13,7 +13,7 @@ class UpdateMenuItemTest extends \PHPUnit_Framework_TestCase
 
         $request = new UpdateMenuItem();
 
-        $this->assertNotEmpty($request->rules());
+        $this->assertTrue(is_array($request->rules()));
     }
 
 }

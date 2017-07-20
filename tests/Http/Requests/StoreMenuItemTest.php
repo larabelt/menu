@@ -13,7 +13,7 @@ class StoreMenuItemTest extends \PHPUnit_Framework_TestCase
 
         $request = new StoreMenuItem();
 
-        $this->assertNotEmpty($request->rules());
+        $this->assertTrue(is_array($request->rules()));
     }
 
 }

@@ -1,0 +1,30 @@
+import shared from 'belt/menu/js/components/menu-items/plugins/default/shared';
+import ParamForm from 'belt/core/js/components/paramables/form';
+import html from 'belt/menu/js/components/menu-items/plugins/category/show_children.html';
+
+export default {
+    mixins: [shared],
+    data() {
+        return {
+            param: new ParamForm({
+                morphable_type: 'menu-items',
+                morphable_id: this.menuId(),
+                key: 'show_children'
+            }),
+        }
+    },
+    mounted() {
+        this.param.show('show_children')
+            .then((response) => {
+
+            })
+            .catch(() => {
+
+            });
+    },
+    computed: {},
+    methods: {
+
+    },
+    template: html
+}

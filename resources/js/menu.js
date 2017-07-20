@@ -1,5 +1,5 @@
-import menuGroups  from './components/menu-groups/routes';
-import menuItems  from './components/menu-items/routes';
+import menuGroups  from 'belt/menu/js/components/menu-groups/routes';
+import menuItems  from 'belt/menu/js/components/menu-items/routes';
 import store from 'belt/core/js/store/index';
 
 export default class BeltMenu {

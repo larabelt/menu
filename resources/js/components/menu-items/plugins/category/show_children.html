@@ -1,0 +1,10 @@
+<span>
+    <div class="form-group" :class="{ 'has-error': param.error('value') }">
+        <label for="name">Show Children</label>
+        <select class="form-control" v-model="param.value" @change="param.submit()">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        <span v-for="error in param.error('value')" class="text-danger">{{ error }}</span>
+    </div>
+</span>

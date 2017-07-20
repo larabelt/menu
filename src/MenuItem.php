@@ -21,6 +21,7 @@ class MenuItem extends Model implements
     use NodeTrait {
         children as nodeChildren;
     }
+    use Belt\Core\Behaviors\HasDriver;
     use Belt\Core\Behaviors\Paramable;
     use Belt\Core\Behaviors\Sluggable;
 
@@ -39,7 +40,25 @@ class MenuItem extends Model implements
      */
     public function setUrlAttribute($value)
     {
-        $this->attributes['url'] = StrHelper::normalizeUrl($value);
+        $this->attributes['url'] = $value ? StrHelper::normalizeUrl($value) : null;
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getLabelAttribute($value)
+    {
+        return $value ?: $this->adapter()->label();
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function getUrlAttribute($value)
+    {
+        return $value ?: $this->adapter()->url();
     }
 
 //    /**
@@ -79,6 +98,22 @@ class MenuItem extends Model implements
     public function menuable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configPath()
+    {
+        return 'belt.menu.drivers.' . $this->driver;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function defaultDriverClass()
+    {
+        return Belt\Menu\Drivers\DefaultMenuDriver::class;
     }
 
 }

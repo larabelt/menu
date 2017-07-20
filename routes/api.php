@@ -1,5 +1,6 @@
 <?php
 
+use Belt\Core\Http\Controllers\Api\ConfigController;
 use Belt\Menu\Http\Controllers\Api;
 
 Route::group([
@@ -7,6 +8,9 @@ Route::group([
     'middleware' => ['api']
 ],
     function () {
+
+        # config
+        Route::get('config/belt.menu.drivers/{driver?}', ConfigController::class . '@show');
 
         # menu-items
         Route::group([

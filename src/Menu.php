@@ -2,7 +2,6 @@
 
 namespace Belt\Menu;
 
-use Belt\Menu\Services\MenuService;
 use Illuminate\Support\Traits\Macroable;
 use Knp\Menu\MenuFactory;
 
@@ -75,14 +74,13 @@ class Menu
     {
         $this->macro($menuGroup->slug, function () use ($menuGroup) {
 
-            $menu = $this->create($menuGroup->slug);
+            $menuHelper = $this->create($menuGroup->slug);
 
             foreach ($menuGroup->menuItems as $menuItem) {
-                $submenu = $menu->add($menuItem->url, $menuItem->label);
-                $this->submenu($submenu, $menuItem);
+                $this->add($menuHelper, $menuItem);
             }
 
-            return $menu;
+            return $menuHelper;
         });
     }
 
@@ -98,16 +96,20 @@ class Menu
     }
 
     /**
-     * @param MenuHelper $menu
-     * @param MenuItem $parent
+     * Add item to menu
+     *
+     * @param MenuHelper $menuHelper
+     * @param MenuItem $menuItem
      */
-    public function submenu(MenuHelper $menu, MenuItem $parent)
+    public function add(MenuHelper $menuHelper, MenuItem $menuItem)
     {
-        if ($children = $parent->children) {
-            $menu->add(function ($menu) use ($children) {
+        //$submenu = $menu->add($menuItem->url, $menuItem->label);
+        $submenuHelper = $menuItem->adapter()->add($menuHelper);
+
+        if ($children = $menuItem->children) {
+            $submenuHelper->add(function ($submenuHelper) use ($children) {
                 foreach ($children as $child) {
-                    $submenu = $menu->add($child->url, $child->label);
-                    $this->submenu($submenu, $child);
+                    $this->add($submenuHelper, $child);
                 }
             });
         }

@@ -1,8 +1,8 @@
-import MenuItemForm from '../form';
-import Table from '../table';
-import TreeForm from '../tree';
-import index_html from '../templates/index.html';
 import shared from 'belt/menu/js/components/menu-groups/ctlr/shared';
+import Form from 'belt/menu/js/components/menu-items/helpers/form';
+import Table from 'belt/menu/js/components/menu-items/helpers/table';
+import TreeForm from 'belt/menu/js/components/menu-items/helpers/tree';
+import html from 'belt/menu/js/components/menu-items/index/index.html';
 
 export default {
     mixins: [shared],
@@ -11,7 +11,7 @@ export default {
             data() {
                 return {
                     loading: false,
-                    moving: new MenuItemForm({menuGroupId: this.$parent.menuGroupId}),
+                    moving: new Form({menuGroupId: this.$parent.menuGroupId}),
                     table: new Table({router: this.$router, menuGroupId: this.$route.params.menuGroupId}),
                 }
             },
@@ -61,7 +61,7 @@ export default {
                         this.loading = false;
                     });
             },
-            template: index_html,
+            template: html,
         },
     },
 }

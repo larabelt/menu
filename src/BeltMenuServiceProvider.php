@@ -33,6 +33,7 @@ class BeltMenuServiceProvider extends ServiceProvider
     {
         include __DIR__ . '/../routes/admin.php';
         include __DIR__ . '/../routes/api.php';
+        include __DIR__ . '/../routes/web.php';
     }
 
     /**
@@ -62,17 +63,20 @@ class BeltMenuServiceProvider extends ServiceProvider
         $this->commands(Belt\Menu\Commands\BuildCommand::class);
         $this->commands(Belt\Menu\Commands\PublishCommand::class);
 
+        // route model binding
+        $router->bind('menu_group', function ($value) {
+            return Belt\Menu\MenuGroup::sluggish($value)->first();
+        });
+        $router->model('menu_item', Belt\Menu\MenuItem::class);
+
+        // add alias/facade
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Menu', Belt\Menu\Facades\MenuFacade::class);
+
+        // bind for facade
         $this->app->bind('menu', function ($app) {
             return new Belt\Menu\Menu();
         });
-
-        // route model binding
-        $router->model('menu_group', Belt\Menu\MenuGroup::class);
-        $router->model('menu_item', Belt\Menu\MenuItem::class);
-
-        // add other aliases
-        $loader = AliasLoader::getInstance();
-        $loader->alias('Menu', Belt\Menu\Facades\MenuFacade::class);
 
         // load menus from files
         foreach (config('belt.menu.menus', []) as $key => $config) {

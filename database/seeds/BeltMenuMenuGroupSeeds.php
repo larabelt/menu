@@ -14,10 +14,13 @@ class BeltMenuMenuGroupSeeds extends Seeder
      */
     public function run()
     {
-        factory(MenuGroup::class, 5)
+        factory(MenuGroup::class, 3)
             ->create()
             ->each(function ($menu) {
-                factory(MenuItem::class, 10)->create(['menu_group_id' => $menu->id]);
-            });;
+                factory(MenuItem::class, 3)->create(['menu_group_id' => $menu->id])
+                    ->each(function ($item) {
+                        factory(MenuItem::class, 3)->create(['menu_group_id' => $item->menu_group_id, 'parent_id' => $item->id]);
+                    });
+            });
     }
 }
