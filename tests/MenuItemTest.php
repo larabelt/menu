@@ -72,7 +72,7 @@ class MenuItemTest extends BeltTestCase
 
 }
 
-class MenuItemTestMenuDriver extends BaseMenuDriver
+class MenuItemTestMenuDriver extends DefaultMenuDriver
 {
 
     public function label()

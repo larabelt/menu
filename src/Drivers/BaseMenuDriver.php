@@ -10,7 +10,7 @@ use Belt\Menu\MenuItem;
  * Class BaseMenuDriver
  * @package Belt\Content
  */
-class BaseMenuDriver
+abstract class BaseMenuDriver
 {
     use Belt\Core\Behaviors\HasConfig;
 
@@ -34,11 +34,7 @@ class BaseMenuDriver
      * @param MenuHelper $menuHelper
      * @return MenuHelper|mixed
      */
-    public function add(MenuHelper $menuHelper)
-    {
-        return $menuHelper;
-    }
-
+    abstract public function add(MenuHelper $menuHelper);
 
     /**
      * @return string
