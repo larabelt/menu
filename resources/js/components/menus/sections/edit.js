@@ -1,7 +1,7 @@
 import shared from 'belt/content/js/components/sectionables/ctlr/shared';
 
 // templates
-import edit_html from './edit.html';
+import edit_html from 'belt/menu/js/components/menus/sections/edit.html';
 
 export default {
     mixins: [shared],

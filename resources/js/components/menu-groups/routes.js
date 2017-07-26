@@ -1,6 +1,6 @@
-import index from './ctlr/index';
-import create from './ctlr/create';
-import edit  from './ctlr/edit';
+import index from 'belt/menu/js/components/menu-groups/ctlr/index';
+import create from 'belt/menu/js/components/menu-groups/ctlr/create';
+import edit  from 'belt/menu/js/components/menu-groups/ctlr/edit';
 
 export default [
     {path: '/menu-groups', component: index, canReuse: false, name: 'menuGroups'},

@@ -1,6 +1,6 @@
-import shared from './shared';
+import shared from 'belt/menu/js/components/menu-groups/ctlr/shared';
 
-import form_html from '../templates/form.html';
+import form_html from 'belt/menu/js/components/menu-groups/templates/form.html';
 
 export default {
     mixins: [shared],
