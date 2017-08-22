@@ -5,6 +5,7 @@ namespace Belt\Menu\Http\Controllers\Api;
 use Belt\Core\Http\Controllers\ApiController;
 use Belt\Menu\MenuGroup;
 use Belt\Menu\Http\Requests;
+use Illuminate\Http\Request;
 
 /**
  * Class MenuGroupsController
@@ -30,14 +31,16 @@ class MenuGroupsController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Requests\PaginateMenuGroups $request)
+    public function index(Request $request)
     {
         $this->authorize('index', MenuGroup::class);
 
-        $paginator = $this->paginator($this->menuGroups->query(), $request->reCapture());
+        $request = Requests\PaginateMenuGroups::extend($request);
+
+        $paginator = $this->paginator($this->menuGroups->query(), $request);
 
         return response()->json($paginator->toArray());
     }
