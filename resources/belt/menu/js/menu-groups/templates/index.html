@@ -39,10 +39,16 @@
                         <td>{{ menuGroup.name }}</td>
                         <td class="text-right">
                             <div class="btn-group">
+                                <button type="button" class="btn btn-xs btn-default dropdown-toggle text-muted" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-gear"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><modal-delete :item-id="menuGroup.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove</modal-delete></li>
+                                </ul>
                                 <router-link :to="{ name: 'menuGroups.edit', params: { menuGroupId: menuGroup.id } }" :class="'btn btn-xs btn-default'">
                                     <i class="fa fa-edit"></i>
                                 </router-link>
-                                <modal-delete :item-id="menuGroup.id" :callingObject="table"></modal-delete>
                             </div>
                         </td>
                     </tr>

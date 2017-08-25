@@ -48,10 +48,16 @@
 
                     <div v-if="!isMoving" class="btn-group">
                         <button class="btn btn-default btn-xs" @click.prevent="setMoving(menuItem.id)"><i class="fa fa-arrows-alt"></i></button>
+                        <button type="button" class="btn btn-xs btn-default dropdown-toggle text-muted" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-gear"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><modal-delete :item-id="menuItem.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove</modal-delete></li>
+                        </ul>
                         <router-link :to="{ name: 'menuItems.edit', params: { menuItemId: menuItem.id } }" :class="'btn btn-xs btn-default'">
                             <i class="fa fa-edit"></i>
                         </router-link>
-                        <modal-delete :item-id="menuItem.id" :callingObject="table"></modal-delete>
                     </div>
                 </td>
             </tr>
