@@ -4,7 +4,7 @@
         <input type="hidden" v-model="param.value">
         <div class="input-group">
             <div class="input-group-addon" @click="toggle()"><i class="fa fa-search"></i></div>
-            <input type="text" class="form-control" :value="category.full_name" readonly>
+            <input class="form-control" :value="category.full_name" readonly>
             <div v-if="param.value" class="input-group-addon" @click="clearCategory()"><i class="fa fa-times-circle"></i></div>
         </div>
         <span v-for="error in param.error('value')" class="text-danger">{{ error }}</span>
