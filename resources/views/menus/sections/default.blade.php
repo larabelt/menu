@@ -4,7 +4,7 @@
     if ($active = $section->param('active')) {
         $menu->active($active);
     } else {
-        //$menu->setActiveFromRequest();
+        $menu->guessActive($section);
     }
 @endphp
 

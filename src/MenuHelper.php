@@ -143,7 +143,7 @@ class MenuHelper
 
         if ($section && $owner = $section->owner) {
             if ($owner instanceof HandleableInterface && $handle = $owner->handle) {
-                $active = $this->active("/" . $handle->url);
+                $active = $this->active($handle->url);
             }
         }
 
