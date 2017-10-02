@@ -4,6 +4,7 @@ namespace Belt\Menu;
 
 use Belt;
 use Belt\Core\Helpers\StrHelper;
+use Belt\Core\Helpers\UrlHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kalnoy\Nestedset\NodeTrait;
@@ -40,7 +41,7 @@ class MenuItem extends Model implements
      */
     public function setUrlAttribute($value)
     {
-        $this->attributes['url'] = $value ? StrHelper::normalizeUrl($value) : null;
+        $this->attributes['url'] = $value ? UrlHelper::normalize($value) : null;
     }
 
     /**
