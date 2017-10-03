@@ -17,10 +17,12 @@ class MenuTest extends BeltTestCase
 
     /**
      * @covers \Belt\Menu\Menu::__construct
-     * @covers \Belt\Menu\Menu::get
      * @covers \Belt\Menu\Menu::create
      * @covers \Belt\Menu\Menu::load
      * @covers \Belt\Menu\Menu::add
+     * @covers \Belt\Menu\Menu::get
+     * @covers \Belt\Menu\Menu::getMenu
+     * @covers \Belt\Menu\Menu::getSubMenu
      */
     public function test()
     {
@@ -67,6 +69,19 @@ class MenuTest extends BeltTestCase
         $beltMenu->menuGroup = $qb;
         try {
             $beltMenu->get('UndefinedMenuTestMacro');
+            $this->exceptionNotThrown();
+        } catch (\Exception $e) {
+
+        }
+
+        # get submenu (exception)
+        $beltMenu = new BeltMenu();
+        $qb = m::mock(Builder::class);
+        $qb->shouldReceive('sluggish')->with('MenuTestMacro.undefined')->andReturnSelf();
+        $qb->shouldReceive('first')->andReturn(false);
+        $beltMenu->menuGroup = $qb;
+        try {
+            $beltMenu->get('MenuTestMacro.undefined');
             $this->exceptionNotThrown();
         } catch (\Exception $e) {
 

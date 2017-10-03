@@ -57,13 +57,15 @@ class MenuHelper
 
     /**
      * @param $key
-     * @return MenuHelper
+     * @return MenuHelper|null
      */
     public function submenu($key)
     {
-        $menu = array_get($this->menu, $key, $this->menu);
+        if ($menu = array_get($this->menu, $key)) {
+            return new MenuHelper($menu);
+        }
 
-        return new MenuHelper($menu);
+        return null;
     }
 
     /**

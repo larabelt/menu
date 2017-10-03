@@ -15,12 +15,12 @@ class Menu
     use Macroable;
 
     /**
-     * @var array
+     * @var MenuHelper[]
      */
     public static $menus = [];
 
     /**
-     * @var array
+     * @var MenuHelper[]
      */
     public static $submenus = [];
 
@@ -37,7 +37,7 @@ class Menu
     /**
      * @param $key
      * @param array $parameters
-     * @return mixed|null
+     * @return MenuHelper
      * @throws \Exception
      */
     public function get($key, $parameters = [])
@@ -57,7 +57,7 @@ class Menu
     /**
      * @param $key
      * @param array $parameters
-     * @return mixed|null
+     * @return MenuHelper
      * @throws \Exception
      */
     public function getMenu($key, $parameters = [])
@@ -87,7 +87,7 @@ class Menu
     /**
      * @param $key
      * @param array $parameters
-     * @return mixed|null
+     * @return MenuHelper
      * @throws \Exception
      */
     public function getSubMenu($key, $parameters = [])
@@ -101,10 +101,10 @@ class Menu
         if (!$submenu) {
             $menu = $this->getMenu($slug, $parameters);
             $submenu = $menu->submenu(implode('.', array_slice($keys, 1)));
-            static::$submenus[$key] = static::$submenus[$key] ?? $submenu;
         }
 
         if ($submenu) {
+            static::$submenus[$key] = static::$submenus[$key] ?? $submenu;
             return $submenu;
         }
 
