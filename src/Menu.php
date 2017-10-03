@@ -20,6 +20,11 @@ class Menu
     public static $menus = [];
 
     /**
+     * @var array
+     */
+    public static $submenus = [];
+
+    /**
      * @var MenuGroup
      */
     public $menuGroup;
@@ -37,34 +42,73 @@ class Menu
      */
     public function get($key, $parameters = [])
     {
-        $keys = explode('.', $key);
 
-        $slug = $keys[0];
+        if (str_contains($key, '.')) {
+            $menu = $this->getSubmenu($key, $parameters = []);
+        } else {
+            $menu = $this->getMenu($key, $parameters = []);
+        }
 
-        $menu = static::$menus[$slug] ?? null;
+        $menu->guessActive();
+
+        return $menu;
+    }
+
+    /**
+     * @param $key
+     * @param array $parameters
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function getMenu($key, $parameters = [])
+    {
+        $menu = static::$menus[$key] ?? null;
 
         # search hard-code macro
-        if (!$menu && $this->hasMacro($slug)) {
-            $menu = $this->__call($slug, $parameters);
+        if (!$menu && $this->hasMacro($key)) {
+            $menu = $this->__call($key, $parameters);
         }
 
         # search db and create macro
-        if (!$menu && $menuGroup = $this->menuGroup->sluggish($slug)->first()) {
+        if (!$menu && $menuGroup = $this->menuGroup->sluggish($key)->first()) {
             $this->load($menuGroup);
-            $menu = $this->__call($slug, $parameters);
+            $menu = $this->__call($key, $parameters);
         }
 
         # statically save menu & return
         if ($menu) {
-            static::$menus[$slug] = $menu;
-            # return submenu instead
-            if (count($keys) > 1) {
-                $menu = $menu->submenu(implode('.', array_slice($keys, 1)));
-            }
+            static::$menus[$key] = static::$menus[$key] ?? $menu;
             return $menu;
         }
 
-        throw new \Exception("menu '$slug' not defined");
+        throw new \Exception("menu '$key' not defined");
+    }
+
+    /**
+     * @param $key
+     * @param array $parameters
+     * @return mixed|null
+     * @throws \Exception
+     */
+    public function getSubMenu($key, $parameters = [])
+    {
+
+        $keys = explode('.', $key);
+        $slug = $keys[0];
+
+        $submenu = static::$submenus[$key] ?? null;
+
+        if (!$submenu) {
+            $menu = $this->getMenu($slug, $parameters);
+            $submenu = $menu->submenu(implode('.', array_slice($keys, 1)));
+            static::$submenus[$key] = static::$submenus[$key] ?? $submenu;
+        }
+
+        if ($submenu) {
+            return $submenu;
+        }
+
+        throw new \Exception("submenu '$key' not defined");
     }
 
     /**

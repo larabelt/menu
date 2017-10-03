@@ -116,6 +116,9 @@ class MenuHelper
     {
         $this->active = null;
 
+        //dump(111);
+        //dump($uri);
+
         $menu = clone $this->menu;
 
         $matcher = new Matcher();
@@ -137,22 +140,35 @@ class MenuHelper
         return $this->active;
     }
 
+    /**
+     * @param null $section
+     */
     public function guessActive($section = null)
     {
-        $active = null;
-
-        if ($section && $owner = $section->owner) {
-            if ($owner instanceof HandleableInterface && $handle = $owner->handle) {
-                $active = $this->active($handle->url);
-            }
+        if ($this->active) {
+            return;
         }
 
-        if (!$active) {
+        $this->setActiveByOwner($section);
+
+        if (!$this->active) {
             $request = Request::capture();
             $path = $request->path();
             $this->active("/$path");
         }
 
+    }
+
+    /**
+     * @param $section
+     */
+    public function setActiveByOwner($section)
+    {
+        if ($section && $owner = $section->owner) {
+            if ($owner instanceof HandleableInterface && $handle = $owner->handle) {
+                $this->active($handle->url);
+            }
+        }
     }
 
     /**
