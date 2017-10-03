@@ -118,16 +118,11 @@ class MenuHelper
     {
         $this->active = null;
 
-        //dump(111);
-        //dump($uri);
-
-        $menu = clone $this->menu;
-
         $matcher = new Matcher();
         $matcher->addVoter(new UriVoter($uri));
 
         $treeIterator = new RecursiveIteratorIterator(
-            new RecursiveItemIterator(new ArrayIterator([$menu])),
+            new RecursiveItemIterator(new ArrayIterator([$this->menu])),
             RecursiveIteratorIterator::SELF_FIRST
         );
 
