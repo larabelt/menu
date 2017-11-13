@@ -2,6 +2,8 @@ import menuGroups  from 'belt/menu/js/menu-groups/routes';
 import menuItems  from 'belt/menu/js/menu-items/routes';
 import store from 'belt/core/js/store/index';
 
+window.larabelt.menu = _.get(window, 'larabelt.menu', {});
+
 export default class BeltMenu {
 
     constructor() {
