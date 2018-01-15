@@ -2,7 +2,7 @@
 
 Route::group([
     'prefix' => 'admin/belt/menu',
-    'middleware' => ['web', 'auth']
+    'middleware' => ['web', 'admin']
 ],
     function () {
 
