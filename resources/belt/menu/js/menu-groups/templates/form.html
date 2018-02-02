@@ -11,7 +11,7 @@
     </div>
     <div class="form-group" :class="{ 'has-error': menuGroup.error('body') }">
         <label for="body">Body</label>
-        <textarea class="form-control" rows="10" v-model="menuGroup.body" v-tinymce></textarea>
+        <textarea class="form-control" rows="10" v-model="menuGroup.body" v-editor></textarea>
         <span v-for="error in menuGroup.error('body')" class="text-danger">{{ error }}</span>
     </div>
     <div class="text-right">
