@@ -12,5 +12,6 @@ class BeltMenuSeeder extends Seeder
     public function run()
     {
         $this->call(BeltMenuMenuGroupSeeds::class);
+        $this->call(BeltMenuPermissbleSeeds::class);
     }
 }

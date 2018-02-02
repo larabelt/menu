@@ -36,7 +36,7 @@ class MenuGroupsController extends ApiController
      */
     public function index(Request $request)
     {
-        $this->authorize('index', MenuGroup::class);
+        $this->authorize('view', MenuGroup::class);
 
         $request = Requests\PaginateMenuGroups::extend($request);
 
