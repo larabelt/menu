@@ -55,8 +55,8 @@ class BeltMenuServiceProvider extends ServiceProvider
 
         // morphMap
         Relation::morphMap([
-            'menu-groups' => Belt\Menu\MenuGroup::class,
-            'menu-items' => Belt\Menu\MenuItem::class,
+            'menu_groups' => Belt\Menu\MenuGroup::class,
+            'menu_items' => Belt\Menu\MenuItem::class,
         ]);
 
         // commands

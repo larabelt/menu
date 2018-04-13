@@ -14,13 +14,13 @@ class BeltMenuPermissbleSeeds extends Seeder
     {
         Ability::unguard();
         $abilities = [
-            'menu-groups',
-            'menu-items',
+            'menu_groups',
+            'menu_items',
         ];
         foreach ($abilities as $entity_type => $set) {
             if (is_numeric($entity_type)) {
                 $entity_type = $set;
-                $set = ['*', 'create', 'view', 'update', 'delete'];
+                $set = ['*', 'create', 'update', 'delete'];
             }
             $set = is_array($set) ? $set : [$set];
             foreach ($set as $ability) {

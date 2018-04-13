@@ -36,7 +36,7 @@ class MenuGroupsController extends ApiController
      */
     public function index(Request $request)
     {
-        $this->authorize('view', MenuGroup::class);
+        $this->authorize(['view', 'create', 'update', 'delete'], MenuGroup::class);
 
         $request = Requests\PaginateMenuGroups::extend($request);
 
@@ -82,7 +82,7 @@ class MenuGroupsController extends ApiController
      */
     public function show(MenuGroup $menuGroup)
     {
-        $this->authorize('view', $menuGroup);
+        $this->authorize(['view', 'create', 'update', 'delete'], $menuGroup);
 
         return response()->json($menuGroup);
     }

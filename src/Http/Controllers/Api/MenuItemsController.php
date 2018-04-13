@@ -47,7 +47,7 @@ class MenuItemsController extends ApiController
 
         $request = Requests\PaginateMenuItems::extend($request);
 
-        $this->authorize('view', $menuGroup);
+        $this->authorize(['view', 'create', 'update', 'delete'], $menuGroup);
 
         $request->merge(['menu_group_id' => $menuGroup->id]);
 
@@ -104,7 +104,7 @@ class MenuItemsController extends ApiController
     {
         $this->contains($menuGroup, $menuItem);
 
-        $this->authorize('view', $menuGroup);
+        $this->authorize(['view', 'create', 'update', 'delete'], $menuGroup);
 
         return response()->json($menuItem);
     }
