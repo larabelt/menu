@@ -27,6 +27,7 @@ export default {
         <div>
             <heading>
                 <span slot="title">Menu Group Manager</span>
+                <li><router-link :to="{ name: 'menuGroups' }">Menu Group Manager</router-link></li>
             </heading>
             <section class="content">
                 <index></index>
