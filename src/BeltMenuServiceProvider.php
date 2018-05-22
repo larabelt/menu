@@ -34,6 +34,11 @@ class BeltMenuServiceProvider extends ServiceProvider
         include __DIR__ . '/../routes/admin.php';
         include __DIR__ . '/../routes/api.php';
         include __DIR__ . '/../routes/web.php';
+
+        # beltable values for global belt command
+        $this->app['belt']->addPackage('menu', ['dir' => __DIR__ . '/..']);
+        $this->app['belt']->publish('belt-menu:publish');
+        $this->app['belt']->seeders('BeltMenuSeeder');
     }
 
     /**
@@ -49,6 +54,9 @@ class BeltMenuServiceProvider extends ServiceProvider
 
         // set backup view paths
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'belt-menu');
+
+        // set backup translation paths
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'belt-menu');
 
         // policies
         $this->registerPolicies($gate);
@@ -85,10 +93,6 @@ class BeltMenuServiceProvider extends ServiceProvider
                 include $path;
             }
         }
-
-        # beltable values for global belt command
-        $this->app['belt']->publish('belt-menu:publish');
-        $this->app['belt']->seeders('BeltMenuSeeder');
     }
 
     /**
