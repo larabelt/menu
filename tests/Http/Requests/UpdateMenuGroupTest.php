@@ -2,7 +2,7 @@
 
 use Belt\Menu\Http\Requests\UpdateMenuGroup;
 
-class UpdateMenuGroupTest extends \PHPUnit_Framework_TestCase
+class UpdateMenuGroupTest extends \PHPUnit\Framework\TestCase
 {
 
     /**

@@ -2,7 +2,7 @@
 
 use Belt\Menu\Http\Requests\StoreMenuItem;
 
-class StoreMenuItemTest extends \PHPUnit_Framework_TestCase
+class StoreMenuItemTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
