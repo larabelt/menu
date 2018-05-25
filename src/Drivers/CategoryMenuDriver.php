@@ -4,26 +4,26 @@ namespace Belt\Menu\Drivers;
 
 use Belt;
 use Belt\Menu\MenuHelper;
-use Belt\Glue\Category;
+use Belt\Content\Term;
 
 /**
- * Class CategoryMenuDriver
+ * Class TermMenuDriver
  * @package Belt\Content
  */
-class CategoryMenuDriver extends BaseMenuDriver
+class TermMenuDriver extends BaseMenuDriver
 {
 
     /**
-     * @var Category
+     * @var Term
      */
-    public $category;
+    public $term;
 
     /**
      * @return mixed
      */
-    public function category()
+    public function term()
     {
-        return $this->category ?: $this->category = $this->menuItem->morphParam('categories');
+        return $this->term ?: $this->term = $this->menuItem->morphParam('terms');
     }
 
     /**
@@ -32,12 +32,12 @@ class CategoryMenuDriver extends BaseMenuDriver
      */
     public function add(MenuHelper $menuHelper)
     {
-        $category = $this->category();
+        $term = $this->term();
 
         $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label);
 
         if ($this->menuItem->param('show_children', true)) {
-            foreach ($category->children as $child) {
+            foreach ($term->children as $child) {
                 $submenu->add($child->default_url, $child->name);
             }
         }
@@ -50,7 +50,7 @@ class CategoryMenuDriver extends BaseMenuDriver
      */
     public function label()
     {
-        return $this->category()->name;
+        return $this->term()->name;
     }
 
     /**
@@ -58,6 +58,6 @@ class CategoryMenuDriver extends BaseMenuDriver
      */
     public function url()
     {
-        return $this->category()->default_url;
+        return $this->term()->default_url;
     }
 }

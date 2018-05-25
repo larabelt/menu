@@ -5,16 +5,16 @@ import params  from 'belt/menu/js/menu-items/edit/params';
 
 // plugins
 import pluginMenuItemDefault from 'belt/menu/js/menu-items/plugins/default';
-import pluginMenuItemCategory from 'belt/menu/js/menu-items/plugins/category';
+import pluginMenuItemTerm from 'belt/menu/js/menu-items/plugins/term';
 
 Vue.component('plugin-menu-item-default', function (resolve, reject) {
     setTimeout(function () {
         resolve(pluginMenuItemDefault)
     }, 1000);
 });
-Vue.component('plugin-menu-item-category', function (resolve, reject) {
+Vue.component('plugin-menu-item-term', function (resolve, reject) {
     setTimeout(function () {
-        resolve(pluginMenuItemCategory)
+        resolve(pluginMenuItemTerm)
     }, 1000);
 });
 

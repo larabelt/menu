@@ -1,6 +1,6 @@
 import shared from 'belt/menu/js/menu-items/plugins/default/shared';
 import ParamForm from 'belt/core/js/paramables/form';
-import html from 'belt/menu/js/menu-items/plugins/category/show_children.html';
+import html from 'belt/menu/js/menu-items/plugins/term/show_children.html';
 
 export default {
     mixins: [shared],

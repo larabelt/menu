@@ -1,14 +1,14 @@
 <?php
 
 use Mockery as m;
-use Belt\Glue\Category;
+use Belt\Content\Term;
 use Belt\Core\Testing\BeltTestCase;
-use Belt\Menu\Drivers\CategoryMenuDriver;
+use Belt\Menu\Drivers\TermMenuDriver;
 use Belt\Menu\MenuHelper;
 use Belt\Menu\MenuItem;
 use Illuminate\Database\Eloquent\Collection;
 
-class CategoryMenuDriverTest extends BeltTestCase
+class TermMenuDriverTest extends BeltTestCase
 {
     public function tearDown()
     {
@@ -16,41 +16,41 @@ class CategoryMenuDriverTest extends BeltTestCase
     }
 
     /**
-     * @covers \Belt\Menu\Drivers\CategoryMenuDriver::category
-     * @covers \Belt\Menu\Drivers\CategoryMenuDriver::label
-     * @covers \Belt\Menu\Drivers\CategoryMenuDriver::url
-     * @covers \Belt\Menu\Drivers\CategoryMenuDriver::add
+     * @covers \Belt\Menu\Drivers\TermMenuDriver::term
+     * @covers \Belt\Menu\Drivers\TermMenuDriver::label
+     * @covers \Belt\Menu\Drivers\TermMenuDriver::url
+     * @covers \Belt\Menu\Drivers\TermMenuDriver::add
      */
     public function test()
     {
 
-        $child_category = m::mock(Category::class);
-        $child_category->shouldReceive('getAttribute')->with('name')->andReturn('Some Child');
-        $child_category->shouldReceive('getAttribute')->with('default_url')->andReturn('/categories/some-category/some-child');
+        $child_term = m::mock(Term::class);
+        $child_term->shouldReceive('getAttribute')->with('name')->andReturn('Some Child');
+        $child_term->shouldReceive('getAttribute')->with('default_url')->andReturn('/terms/some-term/some-child');
 
-        $category = factory(Category::class)->make(['name' => 'Some Category', 'slug' => 'some-category']);
-        $category->children = new Collection();
-        $category->children->add($child_category);
+        $term = factory(Term::class)->make(['name' => 'Some Term', 'slug' => 'some-term']);
+        $term->children = new Collection();
+        $term->children->add($child_term);
 
         $menuItem = factory(MenuItem::class)->make(['label' => '', 'url' => '']);
-        $adapter = new CategoryMenuDriver($menuItem, ['config' => []]);
-        $adapter->category = $category;
+        $adapter = new TermMenuDriver($menuItem, ['config' => []]);
+        $adapter->term = $term;
         $menuItem->adapter = $adapter;
 
-        # category
-        $this->assertEquals($category, $adapter->category());
+        # term
+        $this->assertEquals($term, $adapter->term());
 
         # label
-        $this->assertEquals('Some Category', $adapter->label());
+        $this->assertEquals('Some Term', $adapter->label());
 
         # url
-        $this->assertEquals('/categories/some-category', $adapter->url());
+        $this->assertEquals('/terms/some-term', $adapter->url());
 
         # add
         $submenuHelper = m::mock(MenuHelper::class);
-        $submenuHelper->shouldReceive('add')->once()->with('/categories/some-category/some-child', 'Some Child');
+        $submenuHelper->shouldReceive('add')->once()->with('/terms/some-term/some-child', 'Some Child');
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/categories/some-category', 'Some Category')->andReturn($submenuHelper);
+        $menuHelper->shouldReceive('add')->once()->with('/terms/some-term', 'Some Term')->andReturn($submenuHelper);
         $adapter->add($menuHelper);
     }
 

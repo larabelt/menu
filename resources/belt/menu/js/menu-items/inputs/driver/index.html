@@ -4,7 +4,7 @@
         <select class="form-control" v-model="menuItem.driver" @change="wipe()">
             <option disabled value="default">Default</option>
             <option value="default">Default</option>
-            <option value="category">Category</option>
+            <option value="term">Term</option>
         </select>
         <span v-for="error in menuItem.error('driver')" class="text-danger">{{ error }}</span>
     </div>

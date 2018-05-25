@@ -1,28 +1,28 @@
 import shared from 'belt/menu/js/menu-items/plugins/default/shared';
-import categories from 'belt/glue/js/categories/ctlr/index-table';
-import CategoryForm from 'belt/glue/js/categories/form';
-import CategoryTable from 'belt/glue/js/categories/table';
+import terms from 'belt/content/js/terms/ctlr/index-table';
+import TermForm from 'belt/content/js/terms/form';
+import TermTable from 'belt/content/js/terms/table';
 import ParamForm from 'belt/core/js/paramables/form';
-import html from 'belt/menu/js/menu-items/plugins/category/category.html';
+import html from 'belt/menu/js/menu-items/plugins/term/term.html';
 
 export default {
     mixins: [shared],
     data() {
         return {
-            category: new CategoryForm(),
+            term: new TermForm(),
             param: new ParamForm({
                 morphable_type: 'menu_items',
                 morphable_id: this.menuId(),
-                key: 'categories'
+                key: 'terms'
             }),
-            table: new CategoryTable(),
+            table: new TermTable(),
             search: false,
         }
     },
     mounted() {
-        this.param.show('categories')
+        this.param.show('terms')
             .then((response) => {
-                this.category.show(response.value);
+                this.term.show(response.value);
             })
             .catch(() => {
 
@@ -30,10 +30,10 @@ export default {
     },
     computed: {},
     methods: {
-        clearCategory() {
+        clearTerm() {
             this.param.value = '';
             this.param.submit();
-            this.category.reset();
+            this.term.reset();
             this.search = false;
         },
         toggle() {
@@ -44,14 +44,14 @@ export default {
         },
     },
     components: {
-        categories: {
-            mixins: [categories],
+        terms: {
+            mixins: [terms],
             methods: {
-                confirm(category) {
-                    if (category.id != this.$parent.param.id) {
-                        this.$parent.param.value = category.id;
+                confirm(term) {
+                    if (term.id != this.$parent.param.id) {
+                        this.$parent.param.value = term.id;
                         this.$parent.param.submit();
-                        this.$parent.category.show(category.id);
+                        this.$parent.term.show(term.id);
                         this.$parent.search = false;
                         this.$parent.menuItem.label = '';
                         this.$parent.menuItem.url = '';

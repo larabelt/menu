@@ -57,7 +57,7 @@ class MenuItemsController extends ApiController
     }
 
     /**
-     * Store a newly created resource in glue.
+     * Store a newly created resource in content.
      *
      * @param Requests\StoreMenuItem $request
      * @param MenuGroup $menuGroup
@@ -144,7 +144,7 @@ class MenuItemsController extends ApiController
     }
 
     /**
-     * Remove the specified resource from glue.
+     * Remove the specified resource from content.
      *
      * @param MenuGroup $menuGroup
      * @param MenuItem $menuItem

@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'class' => \Belt\Menu\Drivers\CategoryMenuDriver::class,
-    'plugin' => 'plugin-menu-item-category',
+    'class' => \Belt\Menu\Drivers\TermMenuDriver::class,
+    'plugin' => 'plugin-menu-item-term',
     'params' => [
-        'categories' => null,
+        'terms' => null,
         'show_children' => true,
     ]
 ];
