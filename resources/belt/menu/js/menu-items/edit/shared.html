@@ -6,7 +6,7 @@
                     <router-link :to="{ name: 'menuItems.edit', params: {menuGroupId: $route.params.menuGroupId, menuItemId: morphable_id}}">Menu Item</router-link>
                 </li>
                 <li :class="{active: $router.currentRoute.name == 'menuItems.params'}">
-                    <router-link :to="{ name: 'menuItems.params', params: {menuGroupId: $route.params.menuGroupId, menuItemId: morphable_id}}">Params</router-link>
+                    <router-link :to="{ name: 'menuItems.params', params: {menuGroupId: $route.params.menuGroupId, menuItemId: morphable_id}}"><span class="hidden-sm">Params</span> <i class="fa fa-info-circle visible-sm"></i></router-link>
                 </li>
             </ul>
         </div>

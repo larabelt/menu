@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
     <li :class="{active: $router.currentRoute.name == 'menuGroups.edit'}">
-        <router-link :to="{ name: 'menuGroups.edit', params: {menuGroupId: $route.params.menuGroupId}}">Main</router-link>
+        <router-link :to="{ name: 'menuGroups.edit', params: {menuGroupId: $route.params.menuGroupId}}"><span class="hidden-sm">Main</span> <i class="fa fa-home visible-sm"></i></router-link>
     </li>
     <li :class="{active: $router.currentRoute.name == 'menuItems'}">
         <router-link :to="{ name: 'menuItems', params: {menuGroupId: $route.params.menuGroupId}}">Items</router-link>
