@@ -29,6 +29,9 @@ class Menu
      */
     public $menuGroup;
 
+    /**
+     * Menu constructor.
+     */
     public function __construct()
     {
         $this->menuGroup = new MenuGroup();

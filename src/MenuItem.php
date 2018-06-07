@@ -3,7 +3,6 @@
 namespace Belt\Menu;
 
 use Belt;
-use Belt\Core\Helpers\StrHelper;
 use Belt\Core\Helpers\UrlHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -41,7 +40,8 @@ class MenuItem extends Model implements
      */
     public function setUrlAttribute($value)
     {
-        $this->attributes['url'] = $value ? UrlHelper::normalize($value) : null;
+        $this->attributes['url'] = $value;
+        //$this->attributes['url'] = $value ? UrlHelper::normalize($value) : null;
     }
 
     /**
@@ -61,17 +61,6 @@ class MenuItem extends Model implements
     {
         return $value ?: $this->adapter()->url();
     }
-
-//    /**
-//     * @return array
-//     */
-//    public function toArray()
-//    {
-//        $data = parent::toArray();
-//        $data['ancestors'] = $this->getAncestors()->pluck('label')->all();
-//
-//        return $data;
-//    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

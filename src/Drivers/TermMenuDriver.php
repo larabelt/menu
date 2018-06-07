@@ -34,7 +34,7 @@ class TermMenuDriver extends BaseMenuDriver
     {
         $term = $this->term();
 
-        $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label);
+        $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label, $this->options, $this->linkAttributes);
 
         if ($this->menuItem->param('show_children', true)) {
             foreach ($term->children as $child) {

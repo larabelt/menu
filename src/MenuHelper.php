@@ -107,6 +107,8 @@ class MenuHelper
             $menuItem->setLinkAttribute($key, $value);
         }
 
+        $menuItem->setLinkAttribute('target', array_get($linkAttributes, 'target', 'default'));
+
         return new MenuHelper($menuItem);
     }
 
@@ -118,8 +120,7 @@ class MenuHelper
     {
         $this->active = null;
 
-        $matcher = new Matcher();
-        $matcher->addVoter(new UriVoter($uri));
+        $matcher = new Matcher([new UriVoter($uri)]);
 
         $treeIterator = new RecursiveIteratorIterator(
             new RecursiveItemIterator(new ArrayIterator([$this->menu])),
@@ -208,11 +209,12 @@ class MenuHelper
     {
         $menu = clone $this->menu;
 
-        $matcher = new Matcher();
-
+        $voters = [];
         if ($this->active) {
-            $matcher->addVoter(new UriVoter($this->active->getUri()));
+            $voters[] = new UriVoter($this->active->getUri());
         }
+
+        $matcher = new Matcher($voters);
 
         $result = (new ListRenderer($matcher, ['currentClass' => 'active']))->render($menu);
 
