@@ -22,10 +22,6 @@
                 <thead>
                     <tr>
                         <th>
-                            ID
-                            <column-sorter :column="'menuGroups.id'"></column-sorter>
-                        </th>
-                        <th>
                             Name
                             <column-sorter :column="'menuGroups.name'"></column-sorter>
                         </th>
@@ -34,7 +30,6 @@
                 </thead>
                 <tbody>
                     <tr v-for="menuGroup in table.items">
-                        <td>{{ menuGroup.id }}</td>
                         <td>{{ menuGroup.name }}</td>
                         <td class="text-right">
                             <div class="btn-group">
@@ -59,7 +54,6 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th class="text-right">Actions</th>
                     </tr>
