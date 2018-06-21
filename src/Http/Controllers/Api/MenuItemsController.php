@@ -106,7 +106,7 @@ class MenuItemsController extends ApiController
 
         $this->authorize(['view', 'create', 'update', 'delete'], $menuGroup);
 
-        $menuItem->config = $menuItem->getTemplateConfig();
+        $menuItem->append(['config']);
 
         return response()->json($menuItem);
     }
