@@ -93,6 +93,14 @@ class BeltMenuServiceProvider extends ServiceProvider
                 include $path;
             }
         }
+
+        # beltable values for global belt command
+        $this->app['belt']->publish('belt-menu:publish');
+        $this->app['belt']->seeders('BeltMenuSeeder');
+
+        // access map for window config
+        Belt\Core\Services\AccessService::put('*', 'menu_groups');
+        Belt\Core\Services\AccessService::put('*', 'menu_items');
     }
 
     /**
