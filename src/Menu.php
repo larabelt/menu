@@ -129,6 +129,7 @@ class Menu
 
             return $menuHelper;
         });
+
     }
 
     /**

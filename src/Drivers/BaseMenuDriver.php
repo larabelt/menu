@@ -32,13 +32,13 @@ abstract class BaseMenuDriver
     /**
      * BaseMenuDriver constructor.
      * @param MenuItem $menuItem
-     * @param array $params
+     * @param array $config
      */
-    public function __construct(MenuItem $menuItem, $params = [])
+    public function __construct(MenuItem $menuItem, $config = [])
     {
         $this->menuItem = $menuItem;
         $this->linkAttributes['target'] = $menuItem->target ?: 'default';
-        $this->setConfig(array_get($params, 'config', []));
+        $this->setConfig($config);
     }
 
     /**

@@ -1,4 +1,3 @@
-import Config from 'belt/menu/js/menu-items/helpers/config';
 import Form from 'belt/menu/js/menu-items/helpers/form';
 import html from 'belt/menu/js/menu-items/edit/shared.html';
 
@@ -26,20 +25,10 @@ export default {
         loadMenuItem() {
             this.menuItem.show(this.morphable_id)
                 .then(() => {
-
                     // parent menu item
                     if (this.menuItem.parent_id) {
                         this.parentMenuItem.show(this.menuItem.parent_id);
                     }
-
-                    // config & plugin name
-                    let config = new Config();
-                    config.query.key = this.menuItem.driver;
-                    config.load()
-                        .then((response) => {
-                            this.config = response;
-                            this.plugin = response.plugin;
-                        });
                 });
         }
     },

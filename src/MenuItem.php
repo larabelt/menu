@@ -15,15 +15,15 @@ use Kalnoy\Nestedset\NodeTrait;
 class MenuItem extends Model implements
     Belt\Core\Behaviors\NestedSetInterface,
     Belt\Core\Behaviors\ParamableInterface,
-    Belt\Core\Behaviors\SluggableInterface
+    Belt\Core\Behaviors\SluggableInterface,
+    Belt\Content\Behaviors\IncludesTemplateInterface
 {
 
     use NodeTrait {
         children as nodeChildren;
     }
-    use Belt\Core\Behaviors\HasDriver;
-    use Belt\Core\Behaviors\Paramable;
     use Belt\Core\Behaviors\Sluggable;
+    use Belt\Content\Behaviors\IncludesTemplate;
 
     /**
      * @var string
@@ -34,6 +34,11 @@ class MenuItem extends Model implements
      * @var string
      */
     protected $table = 'menu_items';
+
+    /**
+     * @var mixed
+     */
+    public $adapter;
 
     /**
      * @param $value
@@ -91,19 +96,27 @@ class MenuItem extends Model implements
     }
 
     /**
-     * {@inheritdoc}
+     * Get adapter instance
+     *
+     * @return mixed
+     * @throws \Exception
      */
-    public function configPath()
+    public function adapter()
     {
-        return 'belt.menu.drivers.' . $this->driver;
+        return $this->adapter ?: $this->adapter = $this->initAdapter();
     }
 
     /**
-     * {@inheritdoc}
+     * Instantiate adapter instance
+     *
+     * @return mixed
+     * @throws \Exception
      */
-    public function defaultDriverClass()
+    public function initAdapter()
     {
-        return Belt\Menu\Drivers\DefaultMenuDriver::class;
+        $driver = $this->getTemplateConfig('driver', Belt\Menu\Drivers\DefaultMenuDriver::class);
+
+        return new $driver($this, ['config' => $this->getTemplateConfig()]);
     }
 
 }

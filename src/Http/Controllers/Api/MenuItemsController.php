@@ -82,7 +82,7 @@ class MenuItemsController extends ApiController
             'parent_id',
             'menuable_id',
             'menuable_type',
-            'driver',
+            'template',
             'target',
             'slug',
         ]);
@@ -131,7 +131,7 @@ class MenuItemsController extends ApiController
             'parent_id',
             'menuable_id',
             'menuable_type',
-            'driver',
+            'template',
             'label',
             'url',
             'target',
