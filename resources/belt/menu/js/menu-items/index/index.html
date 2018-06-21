@@ -1,9 +1,11 @@
 <div>
-    <div class="clearfix">
-        <div class="btn-group">
-            <router-link :to="{ name: 'menuItems.create' }" :class="'btn btn-primary'">Add Menu Item</router-link>
+
+    <div class="filter-set clearfix">
+        <div class="pull-right">
+            <router-link :to="{ name: 'menuItems.create' }" :class="'btn btn-primary'">add menu item</router-link>
         </div>
     </div>
+
     <div class="table-responsive">
         <div v-if="loading">
             <i class="fa fa-spinner fa-spin fa-fw"></i>
@@ -14,7 +16,7 @@
             <tr>
                 <th>Label</th>
                 <th>Url</th>
-                <th>Type</th>
+                <th>Template</th>
                 <th class="text-right">Actions</th>
             </tr>
             </thead>
@@ -22,8 +24,7 @@
             <tr v-for="menuItem in table.items">
                 <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.label }}</td>
                 <td>{{ menuItem.url }}</td>
-                <td v-if="menuItem.menuable_type">{{ menuItem.menuable_type }}</td>
-                <td v-else>default</td>
+                <td>{{ menuItem.template }}</td>
                 <td class="text-right">
                     <template v-if="isMoving">
                         <template v-if="isMoving != menuItem.id">
@@ -60,9 +61,13 @@
                             <i class="fa fa-gear"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><modal-delete :item-id="menuItem.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove</modal-delete></li>
+                            <li>
+                                <modal-delete :item-id="menuItem.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove
+                                </modal-delete>
+                            </li>
                         </ul>
-                        <router-link :to="{ name: 'menuItems.edit', params: { menuItemId: menuItem.id } }" :class="'btn btn-xs btn-default'" title="edit menu item">
+                        <router-link :to="{ name: 'menuItems.edit', params: { menuItemId: menuItem.id } }" :class="'btn btn-xs btn-default'"
+                                     title="edit menu item">
                             <i class="fa fa-edit"></i>
                         </router-link>
                     </div>

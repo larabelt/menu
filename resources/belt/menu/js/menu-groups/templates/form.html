@@ -10,8 +10,8 @@
         <span v-for="error in menuGroup.error('slug')" class="text-danger">{{ error }}</span>
     </div>
     <div class="form-group" :class="{ 'has-error': menuGroup.error('body') }">
-        <label for="body">Body</label>
-        <belt-editor v-model="menuGroup.body"></belt-editor>
+        <label for="body">Description</label>
+        <textarea class="form-control" rows="3" v-model="menuGroup.body"></textarea>
         <span v-for="error in menuGroup.error('body')" class="text-danger">{{ error }}</span>
     </div>
     <div class="text-right">

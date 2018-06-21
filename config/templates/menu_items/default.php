@@ -12,6 +12,9 @@ return [
     // that will run custom code for the menu item
     'driver' => \Belt\Menu\Drivers\DefaultMenuDriver::class,
 
+    // The list of standard fields to display. Options include: url, slug, target
+    'display' => ['url', 'target',],
+
     /*
     | A set of custom parameters that belong to the templatable object.
     |
