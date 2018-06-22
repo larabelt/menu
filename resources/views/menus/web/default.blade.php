@@ -1,7 +1,6 @@
 @php
-    if(is_string($menu)) {
-        $menu = Menu::get($menu);
-    }
+    $class = $class ?? '';
+    $menu = is_string($menu) ? Menu::get($menu) : $menu;
     if (isset($active)) {
         $menu->active($active);
     } else {
@@ -9,9 +8,7 @@
     }
 @endphp
 
-{{--{!! $menu !!}--}}
-
-<ul>
+<ul class="{{ $class }}">
     @foreach($menu->items() as $item)
         @include('belt-menu::menus.web._show')
     @endforeach
