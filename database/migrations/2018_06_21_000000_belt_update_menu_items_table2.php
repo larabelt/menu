@@ -12,9 +12,17 @@ class BeltUpdateMenuItemsTable2 extends Migration
      */
     public function up()
     {
+        // SQLlite doesn't doesn't support multiple calls to renameColumn, dropColumn in single modification...
+
         Schema::table('menu_items', function (Blueprint $table) {
             $table->renameColumn('driver', 'template');
+        });
+
+        Schema::table('menu_items', function (Blueprint $table) {
             $table->dropColumn('menuable_id');
+        });
+
+        Schema::table('menu_items', function (Blueprint $table) {
             $table->dropColumn('menuable_type');
         });
     }
