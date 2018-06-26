@@ -3,9 +3,7 @@
 namespace Belt\Menu;
 
 use Belt;
-use Belt\Core\Helpers\UrlHelper;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kalnoy\Nestedset\NodeTrait;
 
 /**
@@ -46,7 +44,6 @@ class MenuItem extends Model implements
     public function setUrlAttribute($value)
     {
         $this->attributes['url'] = $value;
-        //$this->attributes['url'] = $value ? UrlHelper::normalize($value) : null;
     }
 
     /**
@@ -83,16 +80,6 @@ class MenuItem extends Model implements
     public function children()
     {
         return $this->nodeChildren()->orderBy('_lft');
-    }
-
-    /**
-     * The Associated owning model
-     *
-     * @return MorphTo|Model
-     */
-    public function menuable()
-    {
-        return $this->morphTo();
     }
 
     /**

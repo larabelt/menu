@@ -6,7 +6,6 @@ use Belt\Menu\Drivers\DefaultMenuDriver;
 use Belt\Menu\MenuItem;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class MenuItemTest extends BeltTestCase
 {
@@ -16,9 +15,8 @@ class MenuItemTest extends BeltTestCase
      * @covers \Belt\Menu\MenuItem::getLabelAttribute
      * @covers \Belt\Menu\MenuItem::menuGroup
      * @covers \Belt\Menu\MenuItem::children
-     * @covers \Belt\Menu\MenuItem::menuable
-     * @covers \Belt\Menu\MenuItem::configPath
-     * @covers \Belt\Menu\MenuItem::defaultDriverClass
+     * @covers \Belt\Menu\MenuItem::adapter
+     * @covers \Belt\Menu\MenuItem::initAdapter
      */
     public function test()
     {
@@ -32,7 +30,7 @@ class MenuItemTest extends BeltTestCase
 
         # url
         $menuItem->url = 'http://TEST.com';
-        $this->assertEquals('http://test.com', $menuItem->url);
+        $this->assertEquals('http://TEST.com', $menuItem->url);
 
         # label
         $menuItem->label = 'test';
@@ -41,17 +39,12 @@ class MenuItemTest extends BeltTestCase
         # menuGroup
         $this->assertInstanceOf(BelongsTo::class, $menuItem->menuGroup());
 
-        # menuable
-        $this->assertInstanceOf(MorphTo::class, $menuItem->menuable());
-
         # children
         $this->assertInstanceOf(HasMany::class, $menuItem->children());
 
-        # configPath
-        $this->assertEquals('belt.menu.drivers.test', $menuItem->configPath());
+        # adapter
+        $this->assertInstanceOf(BaseMenuDriver::class, $menuItem->adapter());
 
-        # defaultDriverClass
-        $this->assertEquals(DefaultMenuDriver::class, $menuItem->defaultDriverClass());
     }
 
     /**
@@ -60,7 +53,13 @@ class MenuItemTest extends BeltTestCase
      */
     public function testAltDriver()
     {
-        $menuItem = new MenuItemTestMenuItem();
+        MenuItem::unguard();
+
+        $menuItem = new MenuItem(['template' => 'foo']);
+
+        app()['config']->set('belt.templates.menu_items.foo', [
+            'driver' => MenuItemTestMenuDriver::class,
+        ]);
 
         # url
         $this->assertEquals('http://test.com', $menuItem->url);
@@ -88,8 +87,5 @@ class MenuItemTestMenuDriver extends DefaultMenuDriver
 
 class MenuItemTestMenuItem extends MenuItem
 {
-    public function defaultDriverClass()
-    {
-        return MenuItemTestMenuDriver::class;
-    }
+
 }

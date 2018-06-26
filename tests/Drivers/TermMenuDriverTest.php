@@ -1,8 +1,9 @@
 <?php
 
 use Mockery as m;
-use Belt\Content\Term;
 use Belt\Core\Testing\BeltTestCase;
+use Belt\Core\Param;
+use Belt\Content\Term;
 use Belt\Menu\Drivers\TermMenuDriver;
 use Belt\Menu\MenuHelper;
 use Belt\Menu\MenuItem;
@@ -33,6 +34,7 @@ class TermMenuDriverTest extends BeltTestCase
         $term->children->add($child_term);
 
         $menuItem = factory(MenuItem::class)->make(['label' => '', 'url' => '']);
+        $menuItem->params = new Collection([new Param(['key' => 'show_children', 'value' => true])]);
         $adapter = new TermMenuDriver($menuItem, ['config' => []]);
         $adapter->term = $term;
         $menuItem->adapter = $adapter;
@@ -50,7 +52,7 @@ class TermMenuDriverTest extends BeltTestCase
         $submenuHelper = m::mock(MenuHelper::class);
         $submenuHelper->shouldReceive('add')->once()->with('/terms/some-term/some-child', 'Some Child');
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/terms/some-term', 'Some Term')->andReturn($submenuHelper);
+        $menuHelper->shouldReceive('add')->once()->with('/terms/some-term', 'Some Term', [], ['target' => 'default'])->andReturn($submenuHelper);
         $adapter->add($menuHelper);
     }
 

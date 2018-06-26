@@ -18,19 +18,17 @@ class DefaultMenuDriverTest extends BeltTestCase
      */
     public function test()
     {
-        $menuItem = factory(MenuItem::class)->make([
-            'label' => 'test',
-            'url' => 'http://test.com',
-        ]);
+        $menuItem = m::mock(MenuItem::class);
+        $menuItem->shouldReceive('getAttribute')->with('url')->andReturn('http://test.com');
+        $menuItem->shouldReceive('getAttribute')->with('label')->andReturn('Some Test');
+        $menuItem->shouldReceive('getAttribute')->with('target')->andReturn('_blank');
 
-        $config = [];
-
-        $adapter = new DefaultMenuDriver($menuItem, ['config' => $config]);
-
-        $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('http://test.com', 'test');
+        $adapter = new DefaultMenuDriver($menuItem, ['config' => []]);
+        $menuItem->adapter = $adapter;
 
         # add
+        $menuHelper = m::mock(MenuHelper::class);
+        $menuHelper->shouldReceive('add')->once()->with('http://test.com', 'Some Test', [], ['target' => '_blank']);
         $adapter->add($menuHelper);
     }
 

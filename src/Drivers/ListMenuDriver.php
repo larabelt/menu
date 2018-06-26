@@ -21,7 +21,12 @@ class ListMenuDriver extends BaseMenuDriver
     {
         $list = $this->menuItem->morphParam('lists');
 
-        $submenu = $menuHelper->add($list->default_url, $this->menuItem->label, $this->options, $this->linkAttributes);
+        $submenu = $menuHelper->add(
+            $list->default_url,
+            $this->menuItem->label,
+            $this->options,
+            $this->linkAttributes
+        );
 
         return $submenu;
     }
