@@ -1,7 +1,8 @@
 import menuGroup from 'belt/menu/js/menu-groups/ctlr/shared';
 import parentId from 'belt/menu/js/menu-items/inputs/parent_id';
+import templateDropdown from 'belt/content/js/templates';
 import Form from 'belt/menu/js/menu-items/helpers/form';
-import html from 'belt/menu/js/menu-items/edit/index.html';
+import html from 'belt/menu/js/menu-items/create/template.html';
 
 export default {
     mixins: [menuGroup],
@@ -15,6 +16,15 @@ export default {
                     menuItem: new Form({router: this.$router, menuGroupId: menuGroupId}),
                     parentMenuItem: new Form({router: this.$router, menuGroupId: menuGroupId}),
                 }
+            },
+            methods: {
+                submit() {
+                    Events.$emit('menu_items:' + this.morphable_id + ':saving', this.menuItem);
+                    this.menuItem.submit();
+                }
+            },
+            components: {
+                templateDropdown,
             },
             template: html
         },

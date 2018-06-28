@@ -2,7 +2,7 @@ import shared from 'belt/menu/js/menu-groups/ctlr/shared';
 import Form from 'belt/menu/js/menu-items/helpers/form';
 import Table from 'belt/menu/js/menu-items/helpers/table';
 import TreeForm from 'belt/menu/js/menu-items/helpers/tree';
-import html from 'belt/menu/js/menu-items/index/index.html';
+import html from 'belt/menu/js/menu-items/index/template.html';
 
 export default {
     mixins: [shared],

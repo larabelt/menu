@@ -50,7 +50,7 @@ class TermMenuDriver extends BaseMenuDriver
      */
     public function label()
     {
-        return $this->term()->name;
+        return $this->term()->name ?? '';
     }
 
     /**
@@ -58,6 +58,6 @@ class TermMenuDriver extends BaseMenuDriver
      */
     public function url()
     {
-        return $this->term()->default_url;
+        return $this->term()->default_url ?? '';
     }
 }

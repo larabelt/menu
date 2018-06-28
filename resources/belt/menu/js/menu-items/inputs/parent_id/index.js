@@ -1,6 +1,6 @@
 import shared from 'belt/menu/js/menu-items/edit/shared';
 import Table from 'belt/menu/js/menu-items/helpers/table';
-import html from 'belt/menu/js/menu-items/inputs/parent_id/index.html';
+import html from 'belt/menu/js/menu-items/inputs/parent_id/template.html';
 
 export default {
     data() {

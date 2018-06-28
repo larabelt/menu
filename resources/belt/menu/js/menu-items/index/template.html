@@ -61,10 +61,7 @@
                             <i class="fa fa-gear"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <modal-delete :item-id="menuItem.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove
-                                </modal-delete>
-                            </li>
+                            <li><modal-delete :item-id="menuItem.id" _class="''" :callingObject="table"><i class="fa fa-trash"></i> Remove</modal-delete></li>
                         </ul>
                         <router-link :to="{ name: 'menuItems.edit', params: { menuItemId: menuItem.id } }" :class="'btn btn-xs btn-default'"
                                      title="edit menu item">
