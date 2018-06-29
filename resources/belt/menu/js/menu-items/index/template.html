@@ -14,17 +14,17 @@
         <table v-if="table.items.length" class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th>Label</th>
+                <th>Type</th>
+                <th>Name</th>
                 <th>Url</th>
-                <th>Template</th>
                 <th class="text-right">Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="menuItem in table.items">
-                <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.label }}</td>
-                <td>{{ menuItem.url }}</td>
                 <td>{{ menuItem.template }}</td>
+                <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.name }}</td>
+                <td>{{ menuItem.url }}</td>
                 <td class="text-right">
                     <template v-if="isMoving">
                         <template v-if="isMoving != menuItem.id">

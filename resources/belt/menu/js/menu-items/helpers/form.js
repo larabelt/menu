@@ -14,7 +14,7 @@ class MenuItemForm extends BaseForm {
             id: '',
             template: '',
             parent_id: null,
-            label: '',
+            name: '',
             url: '',
             target: '',
             slug: '',
@@ -36,7 +36,7 @@ class MenuItemForm extends BaseForm {
     }
 
     fullName() {
-        let names = this.ancestors.concat(this.label);
+        let names = this.ancestors.concat(this.name);
         return names.join(' > ');
     }
 

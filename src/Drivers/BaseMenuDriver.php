@@ -52,7 +52,7 @@ abstract class BaseMenuDriver
      */
     public function label()
     {
-        return '';
+        return $this->menuItem->name;
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class BaseMenuDriver
      */
     public function url()
     {
-        return '';
+
     }
 
 }

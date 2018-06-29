@@ -21,7 +21,12 @@ class PageMenuDriver extends BaseMenuDriver
     {
         $page = $this->menuItem->morphParam('pages');
 
-        $submenu = $menuHelper->add($page->default_url, $this->menuItem->label, $this->options, $this->linkAttributes);
+        $submenu = $menuHelper->add(
+            $page->default_url,
+            $this->menuItem->label,
+            $this->options,
+            $this->linkAttributes
+        );
 
         return $submenu;
     }

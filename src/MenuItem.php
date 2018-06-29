@@ -40,24 +40,18 @@ class MenuItem extends Model implements
 
     /**
      * @param $value
+     * @return mixed
+     * @throws \Exception
      */
-    public function setUrlAttribute($value)
+    public function getLabelAttribute()
     {
-        $this->attributes['url'] = $value;
+        return $this->adapter()->label();
     }
 
     /**
      * @param $value
      * @return mixed
-     */
-    public function getLabelAttribute($value)
-    {
-        return $value ?: $this->adapter()->label();
-    }
-
-    /**
-     * @param $value
-     * @return mixed
+     * @throws \Exception
      */
     public function getUrlAttribute($value)
     {
@@ -90,7 +84,7 @@ class MenuItem extends Model implements
      */
     public function adapter()
     {
-        return $this->adapter ?: $this->adapter = $this->initAdapter();
+        return $this->adapter ?: $this->initAdapter();
     }
 
     /**
@@ -103,7 +97,9 @@ class MenuItem extends Model implements
     {
         $driver = $this->getTemplateConfig('driver', Belt\Menu\Drivers\DefaultMenuDriver::class);
 
-        return new $driver($this, ['config' => $this->getTemplateConfig()]);
+        $adapter = new $driver($this, ['config' => $this->getTemplateConfig()]);
+
+        return $this->adapter = $adapter;
     }
 
 }

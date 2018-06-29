@@ -15,10 +15,16 @@ class DefaultMenuDriver extends BaseMenuDriver
     /**
      * @param MenuHelper $menuHelper
      * @return MenuHelper|mixed
+     * @throws \Exception
      */
     public function add(MenuHelper $menuHelper)
     {
-        $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label, $this->options, $this->linkAttributes);
+        $submenu = $menuHelper->add(
+            $this->menuItem->url,
+            $this->menuItem->label,
+            $this->options,
+            $this->linkAttributes
+        );
 
         return $submenu;
     }

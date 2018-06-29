@@ -7,14 +7,14 @@
         <table v-if="table.items.length" class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th>Label</th>
+                <th>Name</th>
                 <th>Url</th>
                 <th class="text-right">Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="menuItem in table.items">
-                <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.label }}</td>
+                <td>{{ ' &mdash; '.repeat(menuItem.depth) }}{{ menuItem.name }}</td>
                 <td>{{ menuItem.url }}</td>
                 <td class="text-right">
                     <button class="btn btn-default btn-xs" @click.prevent="confirm(menuItem)">

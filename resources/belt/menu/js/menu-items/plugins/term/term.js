@@ -53,7 +53,7 @@ export default {
                         this.$parent.param.submit();
                         this.$parent.term.show(term.id);
                         this.$parent.search = false;
-                        this.$parent.menuItem.label = '';
+                        this.$parent.menuItem.name = '';
                         this.$parent.menuItem.url = '';
                         this.$parent.menuItem.submit();
                     }
