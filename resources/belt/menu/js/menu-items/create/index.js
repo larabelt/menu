@@ -1,6 +1,6 @@
 import menuGroup from 'belt/menu/js/menu-groups/ctlr/shared';
 import parentId from 'belt/menu/js/menu-items/inputs/parent_id';
-import templateDropdown from 'belt/content/js/templates';
+import templateDropdown from 'belt/content/js/templates/inputs/default';
 import Form from 'belt/menu/js/menu-items/helpers/form';
 import html from 'belt/menu/js/menu-items/create/template.html';
 
