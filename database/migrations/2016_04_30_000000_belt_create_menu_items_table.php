@@ -35,6 +35,6 @@ class BeltCreateMenuItemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menu_items');
+        Schema::dropIfExists('menu_items');
     }
 }

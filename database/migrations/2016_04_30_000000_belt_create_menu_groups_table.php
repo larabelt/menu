@@ -29,6 +29,6 @@ class BeltCreateMenuGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menu_groups');
+        Schema::dropIfExists('menu_groups');
     }
 }
