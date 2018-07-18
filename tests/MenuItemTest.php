@@ -32,9 +32,9 @@ class MenuItemTest extends BeltTestCase
         $menuItem->url = 'http://TEST.com';
         $this->assertEquals('http://TEST.com', $menuItem->url);
 
-        # label
-        $menuItem->label = 'test';
-        $this->assertEquals('test', $menuItem->label);
+//        # label
+//        $menuItem->label = 'test';
+//        $this->assertEquals('test', $menuItem->label);
 
         # menuGroup
         $this->assertInstanceOf(BelongsTo::class, $menuItem->menuGroup());

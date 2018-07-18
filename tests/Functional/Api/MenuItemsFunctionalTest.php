@@ -16,7 +16,6 @@ class MenuItemsFunctionalTest extends Testing\BeltTestCase
 
         # store
         $response = $this->json('POST', '/api/v1/menu-groups/1/menu-items', [
-            'label' => 'test',
             'url' => '/test',
         ]);
         $response->assertStatus(201);
@@ -29,9 +28,9 @@ class MenuItemsFunctionalTest extends Testing\BeltTestCase
         $response->assertStatus(404);
 
         # update
-        $this->json('PUT', "/api/v1/menu-groups/1/menu-items/$menuItemID", ['label' => 'updated']);
+        $this->json('PUT', "/api/v1/menu-groups/1/menu-items/$menuItemID", ['url' => 'updated']);
         $response = $this->json('GET', "/api/v1/menu-groups/1/menu-items/$menuItemID");
-        $response->assertJson(['label' => 'updated']);
+        $response->assertJson(['url' => 'updated']);
 
         # delete
         $response = $this->json('DELETE', "/api/v1/menu-groups/1/menu-items/$menuItemID");
