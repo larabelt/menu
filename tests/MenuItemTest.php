@@ -56,7 +56,7 @@ class MenuItemTest extends BeltTestCase
 
         $menuItem = new MenuItem(['template' => 'foo']);
 
-        app()['config']->set('belt.templates.menu_items.foo', [
+        app()['config']->set('belt.subtypes.menu_items.foo', [
             'driver' => MenuItemTestMenuDriver::class,
         ]);
 
