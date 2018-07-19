@@ -18,6 +18,9 @@
     "knplabs/knp-menu": "^2.2"
   },
   "autoload": {
+    "classmap": [
+      "updates"
+    ],
     "psr-4": {
       "Belt\\Menu\\": "src/"
     }

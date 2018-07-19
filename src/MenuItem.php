@@ -14,14 +14,14 @@ class MenuItem extends Model implements
     Belt\Core\Behaviors\NestedSetInterface,
     Belt\Core\Behaviors\ParamableInterface,
     Belt\Core\Behaviors\SluggableInterface,
-    Belt\Content\Behaviors\IncludesTemplateInterface
+    Belt\Core\Behaviors\IncludesSubtypesInterface
 {
 
     use NodeTrait {
         children as nodeChildren;
     }
     use Belt\Core\Behaviors\Sluggable;
-    use Belt\Content\Behaviors\IncludesTemplate;
+    use Belt\Core\Behaviors\IncludesSubtypes;
 
     /**
      * @var string
@@ -95,9 +95,9 @@ class MenuItem extends Model implements
      */
     public function initAdapter()
     {
-        $driver = $this->getTemplateConfig('driver', Belt\Menu\Drivers\DefaultMenuDriver::class);
+        $driver = $this->getSubtypeConfig('driver', Belt\Menu\Drivers\DefaultMenuDriver::class);
 
-        $adapter = new $driver($this, ['config' => $this->getTemplateConfig()]);
+        $adapter = new $driver($this, ['config' => $this->getSubtypeConfig()]);
 
         return $this->adapter = $adapter;
     }
