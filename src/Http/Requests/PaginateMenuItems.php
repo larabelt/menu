@@ -32,7 +32,7 @@ class PaginateMenuItems extends PaginateRequest
      */
     public $queryModifiers = [
         Belt\Core\Pagination\InQueryModifier::class,
-        Belt\Content\Pagination\TemplateQueryModifier::class,
+        Belt\Content\Pagination\SubtypeQueryModifier::class,
     ];
 
     public function modifyQuery(Builder $query)
