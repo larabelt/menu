@@ -7,8 +7,8 @@ export default {
     data() {
         return {
             param: new ParamForm({
-                morphable_type: 'menu_items',
-                morphable_id: this.menuId(),
+                entity_type: 'menu_items',
+                entity_id: this.menuId(),
                 key: 'show_children'
             }),
         }

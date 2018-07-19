@@ -36,7 +36,7 @@
             <span v-for="error in menuItem.error('target')" class="text-danger">{{ error }}</span>
         </div>
 
-        <param-list v-if="menuItem.id" paramable_type="menu_items" :paramable_id="morphable_id"></param-list>
+        <param-list v-if="menuItem.id" paramable_type="menu_items" :paramable_id="entity_id"></param-list>
 
         <div class="text-right">
             <button class="btn btn-primary" :disabled="menuItem.errors.any()">

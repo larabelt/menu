@@ -6,14 +6,14 @@ export default {
 
         let menuGroupId = this.$parent.menuGroupId ? this.$parent.menuGroupId : this.$route.params.menuGroupId;
         let menuItem = this.$parent.menuItem ? this.$parent.menuItem : new Form({menuGroupId: menuGroupId});
-        let morphable_id = this.$parent.morphable_id ? this.$parent.morphable_id : this.$route.params.menuItemId;
+        let entity_id = this.$parent.entity_id ? this.$parent.entity_id : this.$route.params.menuItemId;
         let parentMenuItem = this.$parent.parentMenuItem ? this.$parent.parentMenuItem : new Form({menuGroupId: menuGroupId});
 
         return {
             menuGroupId: menuGroupId,
             menuItem: menuItem,
-            morphable_type: 'menu-items',
-            morphable_id: morphable_id,
+            entity_type: 'menu-items',
+            entity_id: entity_id,
             parentMenuItem: parentMenuItem,
         }
     },
@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         loadMenuItem() {
-            this.menuItem.show(this.morphable_id)
+            this.menuItem.show(this.entity_id)
                 .then(() => {
                     // parent menu item
                     if (this.menuItem.parent_id) {

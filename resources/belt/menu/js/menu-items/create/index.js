@@ -19,7 +19,7 @@ export default {
             },
             methods: {
                 submit() {
-                    Events.$emit('menu_items:' + this.morphable_id + ':saving', this.menuItem);
+                    Events.$emit('menu_items:' + this.entity_id + ':saving', this.menuItem);
                     this.menuItem.submit();
                 }
             },
