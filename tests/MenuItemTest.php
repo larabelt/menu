@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MenuItemTest extends BeltTestCase
 {
     /**
-     * @covers \Belt\Menu\MenuItem::setUrlAttribute
      * @covers \Belt\Menu\MenuItem::getUrlAttribute
      * @covers \Belt\Menu\MenuItem::getLabelAttribute
      * @covers \Belt\Menu\MenuItem::menuGroup
