@@ -19,7 +19,7 @@
             <span v-for="error in menuItem.error('name')" class="text-danger">{{ error }}</span>
         </div>
 
-        <template-dropdown templateType="menu_items" formKey="menuItem"></template-dropdown>
+        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
 
         <div class="text-right">
             <button class="btn btn-primary" :disabled="menuItem.errors.any()">

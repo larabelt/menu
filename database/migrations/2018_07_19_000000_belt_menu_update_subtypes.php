@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,9 +21,10 @@ class BeltMenuUpdateSubtypes extends Migration
             Schema::table($table, function (Blueprint $table) {
                 $table->renameColumn('template', 'subtype');
             });
-            DB::statement("ALTER TABLE $table MODIFY COLUMN `subtype` VARCHAR(255) AFTER `id`");
+            if (array_get(DB::getConfig(), 'driver') == 'mysql') {
+                DB::statement("ALTER TABLE $table MODIFY COLUMN `subtype` VARCHAR(255) AFTER `id`");
+            }
         }
-
     }
 
     /**
