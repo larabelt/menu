@@ -1,5 +1,6 @@
 <div>
     <form @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
+        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
         <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
             <label for="name">Parent Menu Item</label>
             <input type="hidden" v-model="menuItem.parent_id">
@@ -18,9 +19,6 @@
             <input class="form-control" v-model="menuItem.name" placeholder="name">
             <span v-for="error in menuItem.error('name')" class="text-danger">{{ error }}</span>
         </div>
-
-        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
-
         <div class="text-right">
             <button class="btn btn-primary" :disabled="menuItem.errors.any()">
                 <span v-if="menuItem.saving"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>

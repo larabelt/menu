@@ -1,5 +1,6 @@
 <div>
     <form @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
+        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
         <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
             <label for="name">Parent Menu Item</label>
             <input type="hidden" v-model="menuItem.parent_id">
@@ -18,15 +19,11 @@
             <input class="form-control" v-model="menuItem.name" placeholder="name">
             <span v-for="error in menuItem.error('name')" class="text-danger">{{ error }}</span>
         </div>
-
-        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
-
         <div v-if="displayUrl" class="form-group" :class="{ 'has-error': menuItem.error('url') }">
             <label for="url">Url</label>
             <input class="form-control" v-model="menuItem.url" placeholder="url">
             <span v-for="error in menuItem.error('url')" class="text-danger">{{ error }}</span>
         </div>
-
         <div v-if="displayTarget" class="form-group" :class="{ 'has-error': menuItem.error('target') }">
             <label for="target">Target</label>
             <select class="form-control" v-model="menuItem.target">
@@ -35,9 +32,7 @@
             </select>
             <span v-for="error in menuItem.error('target')" class="text-danger">{{ error }}</span>
         </div>
-
         <param-list v-if="menuItem.id" paramable_type="menu_items" :paramable_id="entity_id"></param-list>
-
         <div class="text-right">
             <button class="btn btn-primary" :disabled="menuItem.errors.any()">
                 <span v-if="menuItem.saving"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
