@@ -1,3 +1,9 @@
+import 'belt/menu/js/bootstrap/inputs';
+import 'belt/menu/js/bootstrap/filters';
+import 'belt/menu/js/bootstrap/functions';
+import 'belt/menu/js/bootstrap/mixins';
+import 'belt/menu/js/bootstrap/tiles';
+
 import menuGroups  from 'belt/menu/js/menu-groups/routes';
 import menuItems  from 'belt/menu/js/menu-items/routes';
 import store from 'belt/core/js/store/index';
@@ -19,7 +25,7 @@ export default class BeltMenu {
             router.addRoutes(menuItems);
             router.addRoutes(menuGroups);
 
-            const app = new Vue({router, store}).$mount('#belt-menu');
+            new Vue({router, store}).$mount('#belt-menu');
         }
     }
 
