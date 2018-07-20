@@ -1,6 +1,6 @@
 <div>
     <form @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
-        <subtype-dropdown entity_type="menu_items" formKey="menuItem"></subtype-dropdown>
+        <input-subtype entity_type="menu_items" formKey="menuItem"></input-subtype>
         <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
             <label for="name">Parent Menu Item</label>
             <input type="hidden" v-model="menuItem.parent_id">
