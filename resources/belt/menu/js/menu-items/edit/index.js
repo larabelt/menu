@@ -1,6 +1,6 @@
 import parent from 'belt/menu/js/menu-groups/ctlr/shared';
 import shared from 'belt/menu/js/menu-items/edit/shared';
-import templateDropdown from 'belt/content/js/subtypes/inputs/default';
+import subtypeDropdown from 'belt/content/js/subtypes/inputs/default';
 import parentId from 'belt/menu/js/menu-items/inputs/parent_id';
 import html from 'belt/menu/js/menu-items/edit/template.html';
 
@@ -19,7 +19,7 @@ let component = {
                 }
             },
             components: {
-                templateDropdown,
+                subtypeDropdown,
             },
             template: html
         },
