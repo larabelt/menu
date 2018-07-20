@@ -12,7 +12,7 @@ class MenuItemForm extends BaseForm {
         this.service = new BaseService({baseUrl: baseUrl});
         this.setData({
             id: '',
-            template: '',
+            subtype: '',
             parent_id: null,
             name: '',
             url: '',
