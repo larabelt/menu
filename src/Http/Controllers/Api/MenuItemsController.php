@@ -74,7 +74,6 @@ class MenuItemsController extends ApiController
 
         $menuItem = $this->menuItems->create([
             'menu_group_id' => $menuGroup->id,
-            //'label' => $input['label'],
             'url' => $input['url'],
         ]);
 
@@ -83,6 +82,7 @@ class MenuItemsController extends ApiController
             'menuable_id',
             'menuable_type',
             'subtype',
+            'name',
             'target',
             'slug',
         ]);
@@ -134,7 +134,7 @@ class MenuItemsController extends ApiController
             'menuable_id',
             'menuable_type',
             'subtype',
-            //'label',
+            'name',
             'url',
             'target',
             'slug',
