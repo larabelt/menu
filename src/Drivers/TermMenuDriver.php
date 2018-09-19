@@ -34,11 +34,11 @@ class TermMenuDriver extends BaseMenuDriver
     {
         $term = $this->term();
 
-        $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label, $this->options, $this->linkAttributes);
+        $submenu = $menuHelper->add($this->menuItem->url, $this->menuItem->label, $this->options, $this->linkAttributes, $this->menuItem);
 
         if ($this->menuItem->param('show_children', true)) {
             foreach ($term->children as $child) {
-                $submenu->add($child->default_url, $child->name);
+                $submenu->add($child->default_url, $child->name, [], [], $this->menuItem);
             }
         }
 

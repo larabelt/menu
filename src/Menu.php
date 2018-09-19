@@ -138,7 +138,8 @@ class Menu
      */
     public function create($name)
     {
-        $menu = (new MenuFactory())->createItem($name);
+        //$menu = (new MenuFactory())->createItem($name);
+        $menu = (new \Belt\Menu\MenuFactory())->createItem($name);
 
         return new MenuHelper($menu);
     }

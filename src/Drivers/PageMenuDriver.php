@@ -25,7 +25,8 @@ class PageMenuDriver extends BaseMenuDriver
             $page->default_url,
             $this->menuItem->label,
             $this->options,
-            $this->linkAttributes
+            $this->linkAttributes,
+            $this->menuItem
         );
 
         return $submenu;

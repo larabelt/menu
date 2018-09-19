@@ -23,7 +23,8 @@ class DefaultMenuDriver extends BaseMenuDriver
             $this->menuItem->url,
             $this->menuItem->label,
             $this->options,
-            $this->linkAttributes
+            $this->linkAttributes,
+            $this->menuItem
         );
 
         return $submenu;

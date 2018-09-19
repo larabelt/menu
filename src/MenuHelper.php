@@ -83,7 +83,7 @@ class MenuHelper
      * @param array $linkAttributes
      * @return MenuHelper|mixed
      */
-    public function add($uri, $label = null, $options = [], $linkAttributes = [])
+    public function add($uri, $label = null, $options = [], $linkAttributes = [], $beltMenuItem = null)
     {
 
         if ($uri instanceof \Closure) {
@@ -100,6 +100,10 @@ class MenuHelper
         $options = array_merge($options, ['uri' => $uri, 'label' => $label]);
 
         $name = array_get($options, 'name', str_slug($label));
+
+        if ($beltMenuItem) {
+            $options['extras']['source'] = $beltMenuItem;
+        }
 
         $menuItem = $this->menu->addChild($name, $options);
 

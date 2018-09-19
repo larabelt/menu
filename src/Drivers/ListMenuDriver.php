@@ -25,7 +25,8 @@ class ListMenuDriver extends BaseMenuDriver
             $list->default_url,
             $this->menuItem->label,
             $this->options,
-            $this->linkAttributes
+            $this->linkAttributes,
+            $this->menuItem
         );
 
         return $submenu;
