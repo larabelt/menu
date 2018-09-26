@@ -50,9 +50,21 @@ class TermMenuDriverTest extends BeltTestCase
 
         # add
         $submenuHelper = m::mock(MenuHelper::class);
-        $submenuHelper->shouldReceive('add')->once()->with('/terms/some-term/some-child', 'Some Child');
+        $submenuHelper->shouldReceive('add')->once()->with(
+            '/terms/some-term/some-child',
+            'Some Child',
+            [],
+            [],
+            $menuItem
+        );
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/terms/some-term', 'Some Term', [], ['target' => 'default'])->andReturn($submenuHelper);
+        $menuHelper->shouldReceive('add')->once()->with(
+            '/terms/some-term',
+            'Some Term',
+            [],
+            ['target' => 'default'],
+            $menuItem
+        )->andReturn($submenuHelper);
         $adapter->add($menuHelper);
     }
 

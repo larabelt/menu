@@ -33,7 +33,13 @@ class PlaceMenuDriverTest extends BeltTestCase
 
         # add
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/places/some-place', 'Some Place', [], ['target' => 'default']);
+        $menuHelper->shouldReceive('add')->once()->with(
+            '/places/some-place',
+            'Some Place',
+            [],
+            ['target' => 'default'],
+            $menuItem
+        );
         $adapter->add($menuHelper);
     }
 

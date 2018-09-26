@@ -33,7 +33,13 @@ class ListMenuDriverTest extends BeltTestCase
 
         # add
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/lists/some-list', 'Some List', [], ['target' => 'default']);
+        $menuHelper->shouldReceive('add')->once()->with(
+            '/lists/some-list',
+            'Some List',
+            [],
+            ['target' => 'default'],
+            $menuItem
+        );
         $adapter->add($menuHelper);
     }
 

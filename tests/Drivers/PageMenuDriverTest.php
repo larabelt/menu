@@ -33,7 +33,13 @@ class PageMenuDriverTest extends BeltTestCase
 
         # add
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('/pages/some-page', 'Some Page', [], ['target' => 'default']);
+        $menuHelper->shouldReceive('add')->once()->with(
+            '/pages/some-page',
+            'Some Page',
+            [],
+            ['target' => 'default'],
+            $menuItem
+        );
         $adapter->add($menuHelper);
     }
 

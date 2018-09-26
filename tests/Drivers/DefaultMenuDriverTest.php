@@ -28,7 +28,13 @@ class DefaultMenuDriverTest extends BeltTestCase
 
         # add
         $menuHelper = m::mock(MenuHelper::class);
-        $menuHelper->shouldReceive('add')->once()->with('http://test.com', 'Some Test', [], ['target' => '_blank']);
+        $menuHelper->shouldReceive('add')->once()->with(
+            'http://test.com',
+            'Some Test',
+            [],
+            ['target' => '_blank'],
+            $menuItem
+        );
         $adapter->add($menuHelper);
     }
 
