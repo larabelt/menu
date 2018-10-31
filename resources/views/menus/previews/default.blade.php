@@ -1,6 +1,6 @@
 @php
     $key = $section->param('menu');
-    $menu = Menu::get($key);
+    $menu = $key ? Menu::get($key) : null;
 @endphp
 
 @if($menu)

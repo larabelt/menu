@@ -1,10 +1,12 @@
 @php
     $key = $section->param('menu');
-    $menu = Menu::get($key);
-    if ($active = $section->param('active')) {
-        $menu->active($active);
-    } else {
-        $menu->guessActive($section);
+    $menu = $key ? Menu::get($key) : null;
+    if ($menu) {
+        if ($active = $section->param('active')) {
+            $menu->active($active);
+        } else {
+            $menu->guessActive($section);
+        }
     }
 @endphp
 
