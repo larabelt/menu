@@ -36,7 +36,7 @@ class MenuItem extends Model implements
     /**
      * @var array
      */
-    protected $appends = ['params'];
+    protected $with = ['params'];
 
     /**
      * @var mixed
