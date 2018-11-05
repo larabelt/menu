@@ -34,6 +34,11 @@ class MenuItem extends Model implements
     protected $table = 'menu_items';
 
     /**
+     * @var array
+     */
+    protected $appends = ['params'];
+
+    /**
      * @var mixed
      */
     public $adapter;
