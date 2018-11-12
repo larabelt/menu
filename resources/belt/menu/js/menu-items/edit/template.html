@@ -1,5 +1,13 @@
 <div>
     <form @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
+
+        <base-button-group>
+            <template slot="left">
+                <button-translate></button-translate>
+            </template>
+            <button-save></button-save>
+        </base-button-group>
+
         <input-subtype entity_type="menu_items" formKey="menuItem"></input-subtype>
         <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
             <label for="name">Parent Menu Item</label>
@@ -14,6 +22,7 @@
         <div v-if="search">
             <parentId></parentId>
         </div>
+        <input-text column="name" required="true">Name</input-text>
         <div class="form-group" :class="{ 'has-error': menuItem.error('name') }">
             <label for="name">Name</label>
             <input class="form-control" v-model="menuItem.name" placeholder="name">

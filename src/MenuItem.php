@@ -11,17 +11,21 @@ use Kalnoy\Nestedset\NodeTrait;
  * @package Belt\Content
  */
 class MenuItem extends Model implements
+    Belt\Core\Behaviors\IncludesSubtypesInterface,
     Belt\Core\Behaviors\NestedSetInterface,
     Belt\Core\Behaviors\ParamableInterface,
     Belt\Core\Behaviors\SluggableInterface,
-    Belt\Core\Behaviors\IncludesSubtypesInterface
+    Belt\Core\Behaviors\TranslatableInterface,
+    Belt\Core\Behaviors\TypeInterface
 {
 
     use NodeTrait {
         children as nodeChildren;
     }
-    use Belt\Core\Behaviors\Sluggable;
     use Belt\Core\Behaviors\IncludesSubtypes;
+    use Belt\Core\Behaviors\Sluggable;
+    use Belt\Core\Behaviors\Translatable;
+    use Belt\Core\Behaviors\TypeTrait;
 
     /**
      * @var string
@@ -37,6 +41,11 @@ class MenuItem extends Model implements
      * @var array
      */
     protected $with = ['params'];
+
+    /**
+     * @var array
+     */
+    protected $appends = ['morph_class'];
 
     /**
      * @var mixed

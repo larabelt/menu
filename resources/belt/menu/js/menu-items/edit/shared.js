@@ -12,7 +12,7 @@ export default {
         return {
             menuGroupId: menuGroupId,
             menuItem: menuItem,
-            entity_type: 'menu-items',
+            entity_type: 'menu_items',
             entity_id: entity_id,
             parentMenuItem: parentMenuItem,
         }
@@ -29,6 +29,9 @@ export default {
         },
         displayUrl() {
             return _.includes(this.display, 'url', false);
+        },
+        form() {
+            return this.menuItem;
         },
     },
     methods: {
