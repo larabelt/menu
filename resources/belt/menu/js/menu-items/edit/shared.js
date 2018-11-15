@@ -24,6 +24,9 @@ export default {
         display() {
             return _.get(this.config, 'display', []);
         },
+        displayLabel() {
+            return _.includes(this.display, 'label', false);
+        },
         displayTarget() {
             return _.includes(this.display, 'target', false);
         },

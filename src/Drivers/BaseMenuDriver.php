@@ -38,6 +38,7 @@ abstract class BaseMenuDriver
     {
         $this->menuItem = $menuItem;
         $this->linkAttributes['target'] = $menuItem->target ?: 'default';
+        $this->options['name'] = $menuItem->slug;
         $this->setConfig($config);
     }
 
@@ -52,7 +53,7 @@ abstract class BaseMenuDriver
      */
     public function label()
     {
-        return $this->menuItem->name;
+        return false;
     }
 
     /**

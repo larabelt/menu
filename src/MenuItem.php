@@ -57,9 +57,9 @@ class MenuItem extends Model implements
      * @return mixed
      * @throws \Exception
      */
-    public function getLabelAttribute()
+    public function getLabelAttribute($value)
     {
-        return $this->adapter()->label();
+        return $this->adapter()->label() ?: $value;
     }
 
     /**
