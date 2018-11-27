@@ -27,7 +27,7 @@
         <div v-if="displayTarget" class="form-group" :class="{ 'has-error': menuItem.error('target') }">
             <label for="target">Target</label>
             <select class="form-control" v-model="menuItem.target">
-                <option value="null">Same Window</option>
+                <option value="_self">Same Window</option>
                 <option value="_blank">New Window</option>
             </select>
             <span v-for="error in menuItem.error('target')" class="text-danger">{{ error }}</span>
