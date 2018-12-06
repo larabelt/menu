@@ -24,6 +24,7 @@ class ListMenuDriverTest extends BeltTestCase
         $list->shouldReceive('getAttribute')->with('default_url')->andReturn('/lists/some-list');
 
         $menuItem = m::mock(MenuItem::class);
+        $menuItem->shouldReceive('getAttribute')->with('slug')->andReturn('some-list');
         $menuItem->shouldReceive('getAttribute')->with('label')->andReturn('Some List');
         $menuItem->shouldReceive('getAttribute')->with('target')->andReturn(false);
         $menuItem->shouldReceive('morphParam')->once()->with('lists')->andReturn($list);
@@ -36,7 +37,7 @@ class ListMenuDriverTest extends BeltTestCase
         $menuHelper->shouldReceive('add')->once()->with(
             '/lists/some-list',
             'Some List',
-            [],
+            ['name' => 'some-list'],
             ['target' => 'default'],
             $menuItem
         );

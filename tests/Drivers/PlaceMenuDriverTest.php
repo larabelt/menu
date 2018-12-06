@@ -24,6 +24,7 @@ class PlaceMenuDriverTest extends BeltTestCase
         $place->shouldReceive('getAttribute')->with('default_url')->andReturn('/places/some-place');
 
         $menuItem = m::mock(MenuItem::class);
+        $menuItem->shouldReceive('getAttribute')->with('slug')->andReturn('some-place');
         $menuItem->shouldReceive('getAttribute')->with('label')->andReturn('Some Place');
         $menuItem->shouldReceive('getAttribute')->with('target')->andReturn(false);
         $menuItem->shouldReceive('morphParam')->once()->with('places')->andReturn($place);
@@ -36,7 +37,7 @@ class PlaceMenuDriverTest extends BeltTestCase
         $menuHelper->shouldReceive('add')->once()->with(
             '/places/some-place',
             'Some Place',
-            [],
+            ['name' => 'some-place'],
             ['target' => 'default'],
             $menuItem
         );

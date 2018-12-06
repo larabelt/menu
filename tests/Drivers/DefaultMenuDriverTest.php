@@ -19,6 +19,7 @@ class DefaultMenuDriverTest extends BeltTestCase
     public function test()
     {
         $menuItem = m::mock(MenuItem::class);
+        $menuItem->shouldReceive('getAttribute')->with('slug')->andReturn('some-test');
         $menuItem->shouldReceive('getAttribute')->with('url')->andReturn('http://test.com');
         $menuItem->shouldReceive('getAttribute')->with('label')->andReturn('Some Test');
         $menuItem->shouldReceive('getAttribute')->with('target')->andReturn('_blank');
@@ -31,7 +32,7 @@ class DefaultMenuDriverTest extends BeltTestCase
         $menuHelper->shouldReceive('add')->once()->with(
             'http://test.com',
             'Some Test',
-            [],
+            ['name' => 'some-test'],
             ['target' => '_blank'],
             $menuItem
         );

@@ -24,6 +24,7 @@ class PageMenuDriverTest extends BeltTestCase
         $page->shouldReceive('getAttribute')->with('default_url')->andReturn('/pages/some-page');
 
         $menuItem = m::mock(MenuItem::class);
+        $menuItem->shouldReceive('getAttribute')->with('slug')->andReturn('some-page');
         $menuItem->shouldReceive('getAttribute')->with('label')->andReturn('Some Page');
         $menuItem->shouldReceive('getAttribute')->with('target')->andReturn(false);
         $menuItem->shouldReceive('morphParam')->once()->with('pages')->andReturn($page);
@@ -36,7 +37,7 @@ class PageMenuDriverTest extends BeltTestCase
         $menuHelper->shouldReceive('add')->once()->with(
             '/pages/some-page',
             'Some Page',
-            [],
+            ['name' => 'some-page'],
             ['target' => 'default'],
             $menuItem
         );

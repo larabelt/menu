@@ -26,6 +26,7 @@ class TermMenuDriverTest extends BeltTestCase
     {
 
         $child_term = m::mock(Term::class);
+        $child_term->shouldReceive('getAttribute')->with('slug')->andReturn('some-child');
         $child_term->shouldReceive('getAttribute')->with('name')->andReturn('Some Child');
         $child_term->shouldReceive('getAttribute')->with('default_url')->andReturn('/terms/some-term/some-child');
 
@@ -33,7 +34,11 @@ class TermMenuDriverTest extends BeltTestCase
         $term->children = new Collection();
         $term->children->add($child_term);
 
-        $menuItem = factory(MenuItem::class)->make(['label' => '', 'url' => '']);
+        $menuItem = factory(MenuItem::class)->make([
+            'slug' => 'some-term-menu-item',
+            'label' => '',
+            'url' => ''
+        ]);
         $menuItem->params = new Collection([new Param(['key' => 'show_children', 'value' => true])]);
         $adapter = new TermMenuDriver($menuItem, ['config' => []]);
         $adapter->term = $term;
@@ -53,7 +58,7 @@ class TermMenuDriverTest extends BeltTestCase
         $submenuHelper->shouldReceive('add')->once()->with(
             '/terms/some-term/some-child',
             'Some Child',
-            [],
+            ['name' => 'some-child'],
             [],
             $menuItem
         );
@@ -61,7 +66,7 @@ class TermMenuDriverTest extends BeltTestCase
         $menuHelper->shouldReceive('add')->once()->with(
             '/terms/some-term',
             'Some Term',
-            [],
+            ['name' => 'some-term-menu-item'],
             ['target' => 'default'],
             $menuItem
         )->andReturn($submenuHelper);
