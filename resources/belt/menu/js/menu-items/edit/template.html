@@ -1,53 +1,60 @@
-<div>
-    <form @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
+<form v-if="menuItem.id" @submit.prevent="submit()" @keydown="menuItem.errors.clear($event.target.name)">
 
-        <base-button-group>
-            <template slot="left">
-                <button-translate></button-translate>
-            </template>
-            <button-save></button-save>
-        </base-button-group>
-
-        <input-subtype entity_type="menu_items" formKey="menuItem"></input-subtype>
-        <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
-            <label for="name">Parent Menu Item</label>
-            <input type="hidden" v-model="menuItem.parent_id">
-            <div class="input-group">
-                <div class="input-group-addon" @click="toggle()"><i class="fa fa-search"></i></div>
-                <input class="form-control" :value="parentMenuItem.fullName()" readonly>
-                <div v-if="menuItem.parent_id" class="input-group-addon" @click="clearParentMenuItem()"><i class="fa fa-times-circle"></i></div>
-            </div>
-            <span v-for="error in menuItem.error('parent_id')" class="text-danger">{{ error }}</span>
-        </div>
-        <div v-if="search">
-            <parentId></parentId>
-        </div>
-        <input-text column="name" required="true">Name</input-text>
-        <input-text v-if="displayLabel" column="label">Label</input-text>
-<!--        <div v-if="displayLabel" class="form-group" :class="{ 'has-error': menuItem.error('label') }">-->
-<!--            <label for="label">Label</label>-->
-<!--            <input class="form-control" v-model="menuItem.label" placeholder="label">-->
-<!--            <span v-for="error in menuItem.error('label')" class="text-danger">{{ error }}</span>-->
+<!--    <div class="clearfix">-->
+<!--        <div class="pull-right">-->
+<!--            <button class="btn btn-default">-->
+<!--                <router-link :to="{ name: 'menuItems', params: {menuGroupId: menuGroupId}}">close</router-link>-->
+<!--            </button>-->
 <!--        </div>-->
-        <div v-if="displayUrl" class="form-group" :class="{ 'has-error': menuItem.error('url') }">
-            <label for="url">Url</label>
-            <input class="form-control" v-model="menuItem.url" placeholder="url">
-            <span v-for="error in menuItem.error('url')" class="text-danger">{{ error }}</span>
+<!--    </div>-->
+<!--    <br/>-->
+
+    <base-button-group>
+        <template slot="left">
+            <button-translate></button-translate>
+        </template>
+        <button-save></button-save>
+    </base-button-group>
+
+    <input-subtype entity_type="menu_items" formKey="menuItem"></input-subtype>
+    <div class="form-group" :class="{ 'has-error': menuItem.error('parent_id') }">
+        <label for="name">Parent Menu Item</label>
+        <input type="hidden" v-model="menuItem.parent_id">
+        <div class="input-group">
+            <div class="input-group-addon" @click="toggle()"><i class="fa fa-search"></i></div>
+            <input class="form-control" :value="parentMenuItem.fullName()" readonly>
+            <div v-if="menuItem.parent_id" class="input-group-addon" @click="clearParentMenuItem()"><i class="fa fa-times-circle"></i></div>
         </div>
-        <div v-if="displayTarget" class="form-group" :class="{ 'has-error': menuItem.error('target') }">
-            <label for="target">Target</label>
-            <select class="form-control" v-model="menuItem.target">
-                <option value="_self">Same Window</option>
-                <option value="_blank">New Window</option>
-            </select>
-            <span v-for="error in menuItem.error('target')" class="text-danger">{{ error }}</span>
-        </div>
-        <input-params v-if="menuItem.id" paramable_type="menu_items" :paramable_id="entity_id"></input-params>
-        <div class="text-right">
-            <button class="btn btn-primary" :disabled="menuItem.errors.any()">
-                <span v-if="menuItem.saving"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
-                <span v-else>save</span>
-            </button>
-        </div>
-    </form>
-</div>
+        <span v-for="error in menuItem.error('parent_id')" class="text-danger">{{ error }}</span>
+    </div>
+    <div v-if="search">
+        <parentId></parentId>
+    </div>
+    <input-text column="name" required="true">Name</input-text>
+    <input-text v-if="displayLabel" column="label">Label</input-text>
+    <!--        <div v-if="displayLabel" class="form-group" :class="{ 'has-error': menuItem.error('label') }">-->
+    <!--            <label for="label">Label</label>-->
+    <!--            <input class="form-control" v-model="menuItem.label" placeholder="label">-->
+    <!--            <span v-for="error in menuItem.error('label')" class="text-danger">{{ error }}</span>-->
+    <!--        </div>-->
+    <div v-if="displayUrl" class="form-group" :class="{ 'has-error': menuItem.error('url') }">
+        <label for="url">Url</label>
+        <input class="form-control" v-model="menuItem.url" placeholder="url">
+        <span v-for="error in menuItem.error('url')" class="text-danger">{{ error }}</span>
+    </div>
+    <div v-if="displayTarget" class="form-group" :class="{ 'has-error': menuItem.error('target') }">
+        <label for="target">Target</label>
+        <select class="form-control" v-model="menuItem.target">
+            <option value="_self">Same Window</option>
+            <option value="_blank">New Window</option>
+        </select>
+        <span v-for="error in menuItem.error('target')" class="text-danger">{{ error }}</span>
+    </div>
+    <input-params v-if="menuItem.id" paramable_type="menu_items" :paramable_id="entity_id"></input-params>
+    <div class="text-right">
+        <button class="btn btn-primary" :disabled="menuItem.errors.any()">
+            <span v-if="menuItem.saving"><i class="fa fa-spinner fa-pulse fa-fw"></i></span>
+            <span v-else>save</span>
+        </button>
+    </div>
+</form>
