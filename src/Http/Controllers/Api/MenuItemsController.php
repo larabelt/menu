@@ -135,6 +135,7 @@ class MenuItemsController extends ApiController
             'menuable_type',
             'subtype',
             'name',
+            'label',
             'url',
             'target',
             'slug',
