@@ -94,6 +94,9 @@ class BeltMenuServiceProvider extends ServiceProvider
             }
         }
 
+        // view composers
+        view()->composer(['*layouts.menus.*'], Belt\Menu\Http\ViewComposers\MenuComposer::class);
+
         # beltable values for global belt command
         $this->app['belt']->publish('belt-menu:publish');
         $this->app['belt']->seeders('BeltMenuSeeder');
