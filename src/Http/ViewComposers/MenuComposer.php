@@ -16,13 +16,23 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        // get / reset menu
-        $menu = array_get($view->getData(), 'menu', 'main');
-        $menu = is_string($menu) ? Menu::get($menu) : $menu;
+        $data = $view->getData();
+
+        $menu = array_get($data, 'menu', 'main');
+        $active = array_get($data, 'active');
+        $classes = array_get($data, 'classes', '');
+
+        try {
+            $menu = is_string($menu) ? Menu::get($menu) : $menu;
+        } catch (\Exception $e) {
+            $menu = Menu::create('empty');
+        }
+
         if (!$menu instanceof Belt\Menu\MenuHelper) {
             throw new \Exception('invalid menu object or key');
         }
-        if (isset($active)) {
+
+        if ($active) {
             $menu->active($active);
         } else {
             $menu->guessActive();
@@ -30,7 +40,7 @@ class MenuComposer
 
         $view->with('menu', $menu);
         $view->with('name', $menu->menu()->getName());
-        $view->with('classes', array_get($view->getData(), 'classes', ''));
+        $view->with('classes', $classes);
     }
 
 }
