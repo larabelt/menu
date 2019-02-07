@@ -34,7 +34,7 @@ class PublishCommand extends Command
         'vendor/larabelt/menu/database/factories' => 'database/factories',
         'vendor/larabelt/menu/database/migrations' => 'database/migrations',
         'vendor/larabelt/menu/database/seeds' => 'database/seeds',
-        'vendor/larabelt/menu/docs' => 'resources/docs',
+        'vendor/larabelt/menu/docs' => 'resources/docs/raw',
     ];
 
 }
