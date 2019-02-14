@@ -4,6 +4,6 @@
 
 To create a Menu Group, start by going to POIs → Menu Group and click on the "Add Menu Group" button.
 
-@include('belt-docs::partials.iframe', ['src' => '/docs/preview/menu/2.0/admin/screen?content=creator.menu_groups&style=content', 'height' => 375])
+@include('belt-core::docs.partials.iframe', ['src' => '/docs/preview/menu/2.0/admin/screen?content=creator.menu_groups&style=content', 'height' => 375])
 
 **(Above) Menu Group Creator Screen**
