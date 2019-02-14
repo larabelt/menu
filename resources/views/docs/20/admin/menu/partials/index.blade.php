@@ -1,0 +1,1 @@
+- [Menus](/docs/{{ $version }}/admin/menu/overview)
