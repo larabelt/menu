@@ -22,7 +22,8 @@
       "updates"
     ],
     "psr-4": {
-      "Belt\\Menu\\": "src/"
+      "Belt\\Menu\\": "src/",
+      "Tests\\Belt\\Menu\\": "tests/"
     }
   }
 }
