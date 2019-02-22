@@ -97,7 +97,7 @@ class MenuComposerTest extends BeltTestCase
         $view->shouldReceive('with')->once()->with('name', 'FOO');
         $view->shouldReceive('with')->once()->with('classes', '');
 
-        Menu::shouldReceive('get')->once()->with('foo')->andThrow(Exception::class);
+        Menu::shouldReceive('get')->once()->with('foo')->andThrow(\Exception::class);
         Menu::shouldReceive('create')->once()->with('empty')->andReturn($menu);
 
         $composer->compose($view);

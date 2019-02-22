@@ -1,6 +1,7 @@
-<?php namespace Tests\Belt\Menu\Unit;
+<?php namespace TestsBelt\Menu\Unit;
 
-use Belt\Menu\Facades\MenuFacade;
+use Belt, Knp;
+use Belt\Menu\Facades\MenuFacade as Menu;
 use Belt\Core\Tests\BeltTestCase;
 use Belt\Menu\Menu as BeltMenu;
 use Belt\Menu\MenuHelper;
@@ -8,25 +9,25 @@ use Belt\Menu\MenuHelper;
 class MenuHelperTest extends BeltTestCase
 {
     /**
-     * @covers \Belt\Menu\MenuHelper::__construct
-     * @covers \Belt\Menu\MenuHelper::__toString
-     * @covers \Belt\Menu\MenuHelper::menu
-     * @covers \Belt\Menu\MenuHelper::submenu
-     * @covers \Belt\Menu\MenuHelper::items
-     * @covers \Belt\Menu\MenuHelper::add
-     * @covers \Belt\Menu\MenuHelper::active
-     * @covers \Belt\Menu\MenuHelper::setActive
-     * @covers \Belt\Menu\MenuHelper::setActiveByOwner
-     * @covers \Belt\Menu\MenuHelper::guessActive
-     * @covers \Belt\Menu\MenuHelper::breadcrumbs
-     * @covers \Belt\Menu\MenuHelper::render
+     * @covers Belt\Menu\MenuHelper::__construct
+     * @covers Belt\Menu\MenuHelper::__toString
+     * @covers Belt\Menu\MenuHelper::menu
+     * @covers Belt\Menu\MenuHelper::submenu
+     * @covers Belt\Menu\MenuHelper::items
+     * @covers Belt\Menu\MenuHelper::add
+     * @covers Belt\Menu\MenuHelper::active
+     * @covers Belt\Menu\MenuHelper::setActive
+     * @covers Belt\Menu\MenuHelper::setActiveByOwner
+     * @covers Belt\Menu\MenuHelper::guessActive
+     * @covers Belt\Menu\MenuHelper::breadcrumbs
+     * @covers Belt\Menu\MenuHelper::render
      */
     public function test()
     {
 
         $this->refreshDB();
 
-        MenuFacade::macro('MenuHelperTestMacro', function () {
+        Menu::macro('MenuHelperTestMacro', function () {
 
             $menu = Menu::create('test');
             $menu->add('/', 'Home');
@@ -51,13 +52,13 @@ class MenuHelperTest extends BeltTestCase
 
         # menu
         # submenu
-        $this->assertInstanceOf(\Knp\Menu\MenuItem::class, $menuHelper->menu());
+        $this->assertInstanceOf(Knp\Menu\MenuItem::class, $menuHelper->menu());
         $this->assertInstanceOf(MenuHelper::class, $menuHelper->submenu('products'));
         $this->assertNull($menuHelper->submenu('undefined'));
 
         # active
         $this->assertNull($menuHelper->active('/missing'));
-        $this->assertInstanceOf(\Knp\Menu\MenuItem::class, $menuHelper->active('/products/widgets/small'));
+        $this->assertInstanceOf(Knp\Menu\MenuItem::class, $menuHelper->active('/products/widgets/small'));
 
         # items
         $this->assertNotEmpty($menuHelper->items());
@@ -74,17 +75,17 @@ class MenuHelperTest extends BeltTestCase
         $menuHelper->guessActive();
 
         # guess active w/section
-        $section = factory(\Belt\Content\Section::class)->make();
-        $section->owner = factory(\Belt\Content\Page::class)->make();
-        $section->owner->handle = factory(\Belt\Content\Handle::class)->make();
+        $section = factory(Belt\Content\Section::class)->make();
+        $section->owner = factory(Belt\Content\Page::class)->make();
+        $section->owner->handle = factory(Belt\Content\Handle::class)->make();
         $menuHelper = $beltMenu->get('MenuHelperTestMacro');
         $menuHelper->active = null;
         $menuHelper->guessActive($section);
 
         # set active w/section
-        $section = factory(\Belt\Content\Section::class)->make();
-        $section->owner = factory(\Belt\Content\Page::class)->make();
-        $section->owner->handle = factory(\Belt\Content\Handle::class)->make();
+        $section = factory(Belt\Content\Section::class)->make();
+        $section->owner = factory(Belt\Content\Page::class)->make();
+        $section->owner->handle = factory(Belt\Content\Handle::class)->make();
         $menuHelper = $beltMenu->get('MenuHelperTestMacro');
         $menuHelper->active = null;
         $menuHelper->setActiveByOwner($section);
