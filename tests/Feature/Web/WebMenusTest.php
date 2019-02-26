@@ -1,8 +1,8 @@
 <?php namespace Tests\Belt\Menu\Feature\Web;
 
-use Belt\Core\Tests;
+use Tests\Belt\Core;
 
-class WebMenusTest extends Tests\BeltTestCase
+class WebMenusTest extends \Tests\Belt\Core\BeltTestCase
 {
 
     public function test()

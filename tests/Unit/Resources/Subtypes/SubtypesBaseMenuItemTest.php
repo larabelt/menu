@@ -1,6 +1,6 @@
 <?php namespace Tests\Belt\Menu\Unit\Resources\Subtypes;
 
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Resources\Subtypes\BaseMenuItem;
 
 class SubtypesBaseMenuItemTest extends BeltTestCase

@@ -1,7 +1,7 @@
 <?php namespace Tests\Belt\Menu\Unit;
 
 use Mockery as m;
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Menu as BeltMenu;
 use Belt\Menu\MenuGroup;
 use Belt\Menu\MenuItem;

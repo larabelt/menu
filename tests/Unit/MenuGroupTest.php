@@ -1,6 +1,6 @@
 <?php namespace Tests\Belt\Menu\Unit;
 
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\MenuGroup;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

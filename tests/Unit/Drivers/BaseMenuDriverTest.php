@@ -1,6 +1,6 @@
 <?php namespace Tests\Belt\Menu\Unit\Drivers;
 
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Drivers\DefaultMenuDriver;
 use Belt\Menu\MenuItem;
 

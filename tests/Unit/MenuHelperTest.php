@@ -2,7 +2,7 @@
 
 use Belt, Knp;
 use Belt\Menu\Facades\MenuFacade as Menu;
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Menu as BeltMenu;
 use Belt\Menu\MenuHelper;
 

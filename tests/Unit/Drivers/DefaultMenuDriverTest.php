@@ -1,7 +1,7 @@
 <?php namespace Tests\Belt\Menu\Unit\Drivers;
 
 use Mockery as m;
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Drivers\DefaultMenuDriver;
 use Belt\Menu\MenuHelper;
 use Belt\Menu\MenuItem;

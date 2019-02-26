@@ -2,7 +2,7 @@
 
 use Mockery as m;
 
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\MenuHelper;
 use Belt\Menu\Http\ViewComposers\MenuComposer;
 use Belt\Menu\Facades\MenuFacade as Menu;

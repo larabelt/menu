@@ -1,6 +1,6 @@
 <?php namespace Tests\Belt\Menu\Unit\Facades;
 
-use Belt\Core\Tests\BeltTestCase;
+use Tests\Belt\Core\BeltTestCase;
 use Belt\Menu\Facades\MenuFacade;
 
 class MenuFacadeTest extends BeltTestCase

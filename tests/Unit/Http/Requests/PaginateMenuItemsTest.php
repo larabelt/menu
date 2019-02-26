@@ -1,14 +1,14 @@
 <?php namespace Tests\Belt\Menu\Unit\Http\Requests;
 
 use Mockery as m;
-use Belt\Core\Tests;
+use Tests\Belt\Core;
 use Belt\Menu\Http\Requests\PaginateMenuItems;
 use Illuminate\Database\Eloquent\Builder;
 
-class PaginateMenuItemsTest extends Tests\BeltTestCase
+class PaginateMenuItemsTest extends \Tests\Belt\Core\BeltTestCase
 {
 
-    use Tests\CommonMocks;
+    use \Tests\Belt\Core\Base\CommonMocks;
 
     public function tearDown()
     {
